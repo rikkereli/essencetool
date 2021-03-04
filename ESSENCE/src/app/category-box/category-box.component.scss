@@ -1,0 +1,43 @@
+$product-view-color: rgb(189, 21, 21);
+$project-view-color: rgb(75, 184, 48);
+$paradigm-view-color: rgb(204, 201, 41);
+$process-view-color: #369;
+.product,
+.process,
+.paradigm,
+.project {
+    border: 5px;
+    border-style: solid;
+    height: 250px;
+    width: 250px;
+    display: inline-block;
+    justify-content: center;
+}
+
+.itemsList {
+    overflow: auto;
+    height: 180px;
+    width: 250px;
+}
+
+.product {
+    border-color: $product-view-color;
+}
+
+.process {
+    border-color: $process-view-color;
+}
+
+.paradigm {
+    border-color: $paradigm-view-color;
+}
+
+.project {
+    border-color: $project-view-color;
+}
+
+.title {
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
+}

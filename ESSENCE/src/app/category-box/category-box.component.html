@@ -1,0 +1,13 @@
+<div [ngClass]="view">
+    <!--Pipe that transform each letter in title to uppercase before it is displayed-->
+    <h2 class="title">{{title | uppercase}}</h2>
+    <!--Unordered list that displays the ESSENCE item-->
+    <div class="itemsList">
+        <ul class="categoryItem" *ngFor="let item of items">
+            <li>
+                <span class="badge"> {{item}}  </span>
+            </li>
+        </ul>
+    </div>
+
+</div>
