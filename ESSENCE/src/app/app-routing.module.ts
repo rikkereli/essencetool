@@ -1,3 +1,4 @@
+//npm ci && npm run buildimport 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

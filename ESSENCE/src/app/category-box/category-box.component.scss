@@ -2,22 +2,37 @@ $product-view-color: rgb(189, 21, 21);
 $project-view-color: rgb(75, 184, 48);
 $paradigm-view-color: rgb(204, 201, 41);
 $process-view-color: #369;
-.product,
-.process,
-.paradigm,
-.project {
+.categoryContainer {
     border: 5px;
+    padding: 0px;
+    margin: 0px;
     border-style: solid;
-    height: 250px;
-    width: 250px;
-    display: inline-block;
     justify-content: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
-.itemsList {
+h2 {
+    font-size: 20px;
+}
+
+.itemsRow {
+    height: 70%;
+}
+
+.itemsCol {
+    padding: 0px;
     overflow: auto;
-    height: 180px;
-    width: 250px;
+    height: 80%;
+    min-width: 100%;
+    width: 100%;
+}
+
+.subContainer {
+    padding: 0px;
 }
 
 .product {
@@ -36,8 +51,45 @@ $process-view-color: #369;
     border-color: $project-view-color;
 }
 
-.title {
-    font-weight: bold;
+.titleBox {
+    height: fit-content;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.titleText {
     justify-content: center;
     display: flex;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.item {
+    width: 100%;
+}
+
+.itemsBox {
+    overflow: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.contentcol {
+    height: inherit;
+    background-color: lightblue;
+    align-items: stretch;
+    padding: 0px;
+}
+
+.listitem {
+    width: 100%;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
