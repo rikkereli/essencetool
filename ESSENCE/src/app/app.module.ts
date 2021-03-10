@@ -11,11 +11,13 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoryItemComponent } from './category-item/category-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CategoryBoxComponent
+    CategoryBoxComponent,
+    CategoryItemComponent
   ],
   imports: [
     BrowserModule,

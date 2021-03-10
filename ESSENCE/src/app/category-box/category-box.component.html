@@ -6,44 +6,7 @@
     </div>
     <div class="itemsBox flex-grow-1" formArrayName="categoryItems">
         <div *ngFor="let item of categoryItems.controls; let i=index">
-            <textarea class="item" [formControlName]="i"></textarea>
-        </div>
-    </div>
-    <!--Flex-grow-1 fills out remaining space-->
-    <!--
-                    <textarea [formControlName]="i"></textarea>
-
-    <div class="row itemsBox flex-grow-1">
-        <div class="col-12" *ngFor="let item of itemsList.controls; let i = index">
-            <textarea class="item" resizeToFitContent="true"></textarea>
-        </div>
-    </div>
-    -->
-</div>
-<!--
-<div class="container" [ngClass]="view">
-    <div class="row titlecol">
-        <div class="col titlecol">
-            <div class="md-form">
-            </div>
-            <h1> {{title}}</h1>
-        </div>
-    </div>
-
-    <div class="row itemsRow" *ngIf=itemsList>
-        <div class="col itemsCol">
-            <div *ngFor="let item of itemsList.controls; let i = index">
-                <input [formControl]="itemsList.controls[i]" width="inherit" resizeToFitContent="true">
-
-            </div>
-                   <ul formArrayName="itemsList" class="categoryItem" *ngFor="let item of itemsList?.controls; let i = index">
-                    <li class="listitem">
-                        <textarea [formControlName]="i" width="inherit" resizeToFitContent="true">
-
-                        </textarea>
-                    </li>
-                </ul>
+            <app-category-item (focusout)="clickOutsideFunction($event)" (click)="clickFunction($event)" [formControlName]="i"> </app-category-item>
         </div>
     </div>
 </div>
--->
