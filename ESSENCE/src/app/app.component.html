@@ -2,91 +2,16 @@
     <span> {{title}}</span>
 </mat-toolbar>
 
-
-<div class="container">
-    <div class="row outerRow">
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [boxView]="paradigmView" [title]="challengeTitle" [singleItemCategory]="true" [items]="challengeItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [boxView]="paradigmView" [singleItemCategory]="true" [title]="problemTitle" [items]="problemItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="productView" [title]="leverageTitle" [items]="leverageItems"></app-category-box>
-        </div>
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [boxView]="projectView" [title]="prospectTitle" [singleItemCategory]="true" [items]="prospectItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [boxView]="projectView" [title]="warrantTitle" [items]="warrantItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [boxView]="projectView" [title]="backingTitle" [items]="backingItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="row outerRow">
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="paradigmView" [title]="elementsTitle" [items]="elementsItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="productView" [title]="architectureTitle" [items]="architectureItems"></app-category-box>
-        </div>
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [boxView]="projectView" [title]="qualifierTitle" [items]="qualifierItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [boxView]="projectView" [title]="rebuttalTitle" [items]="rebuttalItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row outerRow">
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="paradigmView" [title]="scenariosTitle" [items]="scenariosItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="productView" [title]="featuresTitle" [items]="featuresItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [boxView]="projectView" [title]="valuePropositionsTitle" [items]="valuePropositionsItems"></app-category-box>
-        </div>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
 
-    </div>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-    <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<router-outlet>
 
-
-
-    <router-outlet></router-outlet>
+</router-outlet>

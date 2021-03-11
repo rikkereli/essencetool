@@ -13,13 +13,26 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryItemComponent } from './category-item/category-item.component';
 
+import {environment} from 'src/environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { CategoryItemListComponent } from './category-item-list/category-item-list.component';
+import { NgxLoadingModule } from 'ngx-loading';
+
+import { AgGridModule } from 'ag-grid-angular';
+import { CategoryOverviewComponent } from './category-overview/category-overview.component';
+import { ProspectScenarioComponent } from './prospect-scenario/prospect-scenario.component';
 @NgModule({
   declarations: [
     AppComponent,
     CategoryBoxComponent,
-    CategoryItemComponent
+    CategoryItemComponent,
+    CategoryItemListComponent,
+    CategoryOverviewComponent,
+    ProspectScenarioComponent
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -29,7 +42,9 @@ import { CategoryItemComponent } from './category-item/category-item.component';
     NgbModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

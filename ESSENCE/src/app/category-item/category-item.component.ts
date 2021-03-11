@@ -1,5 +1,7 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import * as ids from '../assets/vars';
+
 
 @Component({
   selector: 'app-category-item',
@@ -13,14 +15,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
+
+
 export class CategoryItemComponent implements ControlValueAccessor, OnInit {
   @Input() text: String = "";  
+  @Input() id: String = "";  
   
 
   onChanged: any = () => {};
   onTouched: any = () => {};
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
   writeValue(obj: any): void {
     this.text = obj;
   }
@@ -33,5 +38,10 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
   }
-
+  formGroup;
+  createFormGroup() {
+    this.formGroup = this.fb.group({
+      text: ['']
+    })
+  }
 }

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "essencetoolbox"
+  },
+  "targets": {
+    "essencetoolbox": {
+      "hosting": {
+        "ESSENCE": [
+          "essencetoolbox"
+        ]
+      }
+    }
   }
 }

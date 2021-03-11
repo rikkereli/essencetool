@@ -1,0 +1,33 @@
+app-category-box {
+    height: inherit;
+    width: inherit;
+}
+
+// Defines the height of a column by how many categories are shared in this row
+.shared1 {
+    height: 300px;
+}
+
+.shared2 {
+    height: 150px;
+}
+
+.shared3 {
+    height: 100px;
+}
+
+.shared1,
+.shared2,
+.shared3 {
+    padding: 0px;
+}
+
+.sharedContainer {
+    width: 100%;
+    padding: 0px;
+}
+
+.outerRow {
+    align-items: stretch;
+    padding: 0px;
+}
