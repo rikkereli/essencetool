@@ -19,7 +19,7 @@ export interface CategoryView {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = "App";
+  title = "ESSENCE";
   constructor(private store: AngularFirestore){
     
   }

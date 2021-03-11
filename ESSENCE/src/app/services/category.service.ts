@@ -29,7 +29,7 @@ export class CategoryService {
   }
 
   updateItem(category: string, itemId: string, text: string, nr:number) {
-    this.firestore.collection(ids.categories).doc(category).collection(ids.items).doc(itemId).update({text:text, orderNr:nr});
+    this.firestore.collection(ids.categories).doc(category).collection(ids.items).doc(itemId).set({text:text, orderNr:nr});
   }
   deleteItem(category: string, itemId: string){
     this.firestore.collection(ids.categories).doc(category).collection(ids.items).doc(itemId).delete();

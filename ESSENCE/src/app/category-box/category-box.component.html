@@ -6,7 +6,7 @@
     </div>
     <div class="itemsBox flex-grow-1" [formGroup]=itemsFormGroup>
         <div *ngFor="let item of categoryIDS">
-            <app-category-item (change)="onItemChanged($event)" (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [formControlName]="item.id"> </app-category-item>
+            <app-category-item (change)="onItemChanged($event, item)" (focusout)="clickOutsideFunction($event, item)" (focusin)="clickFunction($event)" [formControlName]="item.id"> </app-category-item>
         </div>
     </div>
 

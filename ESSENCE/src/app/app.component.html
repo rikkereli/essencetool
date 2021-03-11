@@ -1,5 +1,5 @@
-<mat-toolbar>
-    <span> {{title}}</span>
+<mat-toolbar class="toolbar">
+    <span class="top"> {{title}}</span>
 </mat-toolbar>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -9,9 +9,8 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="content">
+    <router-outlet>
 
-
-
-<router-outlet>
-
-</router-outlet>
+    </router-outlet>
+</div>

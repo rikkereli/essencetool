@@ -8,18 +8,25 @@ app-category-box {
     height: 300px;
 }
 
+.maincontainer {
+    border-style: solid;
+    border: 2px;
+    border-color: gray;
+}
+
+.shared1,
+.shared2,
+.shared3 {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
 .shared2 {
     height: 150px;
 }
 
 .shared3 {
     height: 100px;
-}
-
-.shared1,
-.shared2,
-.shared3 {
-    padding: 0px;
 }
 
 .sharedContainer {

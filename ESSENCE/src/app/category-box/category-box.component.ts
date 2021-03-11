@@ -67,6 +67,7 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
   category$: Observable<Category>;
   columnDefs = [
     { headerName: 'Text', field: 'text', sortable: true, filter: true }]
+  bottomBoxAdded: Boolean = false;
 
   categoryView$: Observable<InformationField>;
   name = new FormControl('Rikke');
@@ -83,8 +84,8 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
       this.categoryFormGroup = this.fb.group({
         title: this.title,
         categoryItems: this.fb.array([])
+        
       });
-      var bottomBoxAdded: Boolean = false;
       // Listen to the items list and update the formscontrol accordingly
       this.categoryService.getCategoryItems(this.category).subscribe(item => {
       })   
@@ -123,19 +124,24 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
           else {
 
           }
+
         }
         // Delete all items not in the newlist
 
         ) 
         this.categoryIDS.forEach((element, index) => {
-          if(!newList.includes(element.id)){
+          if(!newList.includes(element.id) && !element.localOnly){
             this.categoryIDS.splice(index, 1);
             this.itemsFormGroup.removeControl(element.id);
           }
 
         });
         this.categoryIDS.sort((a,b) => a.orderNr - b.orderNr);
-
+        // Add an empty box in the bottom of the list in order to be able to edit
+        if(!this.singleItemCategory && !this.bottomBoxAdded) {
+          this.addBottomBox();
+          this.bottomBoxAdded = true;
+        }
       })
       
 
@@ -150,40 +156,62 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
     
 
   }
+  deleteLocal(id) {
+    var index = this.categoryIDS.findIndex(e => e.id == id);
+    this.categoryIDS.splice(index, 1);
+    this.itemsFormGroup.removeControl(id);
+  }
+  // Adds an empty box in the end of the screen
+  // Does not add it to Firestore
+  addBottomBox(){
+    var newItemId: string = this.firestore.createId();
+    // Add local control
+    this.itemsFormGroup.addControl(newItemId,this.fb.control(""));
+    this.categoryIDS.push(new CategoryItem("",newItemId,this.categoryIDS.length, true));
+  }
 
-  onItemChanged(val: any) {
+  onItemChanged(val: any, categoryItem: CategoryItem) {
     // Get item document ID
-    var nodeID = val.currentTarget.attributes.getNamedItem("ng-reflect-name").value;
-    var orderNr =  this.categoryIDS.find(e => e.id == nodeID).orderNr;
-    
-    this.categoryService.updateItem(this.category, nodeID, val.target.value, orderNr);
+
+    // See if item is stored in categoryIDS list
+    // If so, update information here
+    var orderNr =  this.categoryIDS.find(e => e.id == categoryItem.id).orderNr;
+    // Make sure not local only
+    this.categoryIDS.find(e => e.id == categoryItem.id).localOnly = false;
+    this.categoryService.updateItem(this.category, categoryItem.id, val.target.value, orderNr);
+
   }
   clickFunction(val: any) {
     // Find current value and see if it is empty. If user clicks on an empty field, add a new one.
     var currentValue = val.target.value;
     if(currentValue == "") {
-      this.categoryService.addItem(this.category, this.categoryIDS.length);
+      this.addBottomBox();
     }
   }
   // Deletes the item if empty when user loose focus. 
-  clickOutsideFunction(val:any) {
+  clickOutsideFunction(val:any, categoryItem: CategoryItem) {
     // We should only delete items if we can have more than one
     if(!this.singleItemCategory){
     // Get item document ID
-      var nodeID = val.currentTarget.attributes.getNamedItem("ng-reflect-name").value;
       // Get the item number to identify it in the list
       //var id = val.currentTarget.attributes.getNamedItem("ng-reflect-name").nodeValue;
       // Get field value. If empty, delete instance
       var value = val.target.value;
       if(value == "") {
-        this.categoryService.deleteItem(this.category, nodeID);
-        var orderNr =  this.categoryIDS.find(e => e.id == nodeID).orderNr;
+        // If local only, delete from local list
+        if(this.categoryIDS.find(e => e.id == categoryItem.id).localOnly) {
+          this.deleteLocal(categoryItem.id);
+        }
+        // If from firestore, delete from server
+        else {
+        this.categoryService.deleteItem(this.category, categoryItem.id);
+        var orderNr =  this.categoryIDS.find(e => e.id == categoryItem.id).orderNr;
         this.categoryIDS.forEach(element => {
-          if(element.orderNr > orderNr) {
+          if(element.orderNr > orderNr && !element.localOnly) {
             var newOrderNr = element.orderNr-1;
             this.categoryService.updateItem(this.category, element.id, element.text, newOrderNr);
           }
-        });
+        });}
         //this.categoryItems.removeAt(id);
 
       }
@@ -220,5 +248,4 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
   UpdateItem(item: String) {
 
   }
-
 }
