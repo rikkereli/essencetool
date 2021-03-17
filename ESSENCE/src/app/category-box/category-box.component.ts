@@ -1,27 +1,12 @@
 import { AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {CdkTextareaAutosize} from '@angular/cdk/text-field';
-import {map, take} from 'rxjs/operators';
-import {FormArray, FormControl, FormGroup, NgForm, FormBuilder} from '@angular/forms';
+import {FormArray, FormGroup, FormBuilder} from '@angular/forms';
 import { Observable } from 'rxjs';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentData } from '@angular/fire/firestore';
-import * as ids from '../assets/vars';
-import * as Model from '../model';
-
-import { CrudService } from '../shared/crud.service';
-import { CategoryitemService } from '../services/categoryitem.service';
-import { SessionService } from '../services/session.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {AngularFirestore } from '@angular/fire/firestore';
 import { CategoryService } from '../services/category.service';
 import { Category, CategoryItem } from '../model';
+import { ActivatedRoute } from '@angular/router';
 
 
-export enum Views {
-  Paradigm = "paradigm", 
-  Process = "process", 
-  Product = "product",
-  Project = "project"
-}
 
 export interface InformationField {
   displayTitle: string;
@@ -34,115 +19,97 @@ export interface InformationField {
   styleUrls: ['./category-box.component.scss']
 })
 export class CategoryBoxComponent implements AfterViewInit, OnInit {
-  @Input() title: string = "undefined";
-  @Input() boxView: string = "";  
-  @Input() items: string[] = [];
-  @Input() categoryRef: AngularFirestoreDocument<DocumentData>;
   // Enter if this is a category with only a single category item. 
   // Is relevant as it might be confusing to have the option of adding several items when only one is appropriate 
   @Input() singleItemCategory: Boolean = false;
-  itemsForm: FormArray = new FormArray([]);
-  categoryFormGroup: FormGroup;
-  @Input() category: string = "leverage";
-  exp: FormControl;
+  @Input() category: string;
+
   
+  currentHighlight = "Auto";
+  categoryFormGroup: FormGroup;
+  itemsFormGroup: FormGroup;
+
+  category$: Observable<Category>;
+  categoryView$: Observable<InformationField>;
   title$: Observable<any[]> = new Observable;
-  categoryItems$;
+
+  categoryIDS: CategoryItem[] = [];
+  bottomBoxAdded: Boolean = false;
+
   // FormBuilder is not necessary, but adds syntactic sugar
   constructor(
     private fb: FormBuilder, 
     private categoryService: CategoryService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private route: ActivatedRoute
+    ) {}
 
-    ) { 
-    // TODO I am assigning this twice as I don't want to get an error for not initializing and do not know how to update the array
-    this.categoryFormGroup = this.fb.group({
-      title: this.fb.control(this.title),
-      categoryItems: this.fb.array([])
-    });
-    this.exp = this.fb.control("Exp");
-  }
-
-  categoryIDS: CategoryItem[] = [];
-  category$: Observable<Category>;
-  columnDefs = [
-    { headerName: 'Text', field: 'text', sortable: true, filter: true }]
-  bottomBoxAdded: Boolean = false;
-
-  categoryView$: Observable<InformationField>;
-  name = new FormControl('Rikke');
-  view: Views = Views.Process;
-  itemsFormGroup: FormGroup;
+  private sub:any;
+  project: string;
   ngOnInit(): void {
-    this.category$ = this.categoryService.getCategory(this.category);
-    this.categoryItems$ = this.categoryService.getCategoryItems(this.category);
 
-    //document.documentElement.style.setProperty('view-color', '#fff');
-      this.view = this.boxView as Views;
+  
+    this.category$ = this.categoryService.getCategory(this.category);      
+    this.itemsFormGroup = this.fb.group({});
+    this.categoryFormGroup = this.fb.group({categoryItems: this.fb.array([])});
       
-      this.itemsFormGroup = this.fb.group({});
-      this.categoryFormGroup = this.fb.group({
-        title: this.title,
-        categoryItems: this.fb.array([])
-        
-      });
-      // Listen to the items list and update the formscontrol accordingly
-      this.categoryService.getCategoryItems(this.category).subscribe(item => {
-      })   
+    this.sub = this.route.params.subscribe(params => {
+      this.project = params['diagramId'];
 
-      
-      this.firestore.collection(ids.categories).doc(this.category).collection<CategoryItem>("items", ref => ref.orderBy("orderNr")).snapshotChanges().subscribe(changes => {
+      this.categoryService.getCategoryItems(this.category, this.project).snapshotChanges().subscribe(changes => {
         // All items that have been touched
-        var newList: String[] = []
-        changes.map(changedItem => {
-          
-          // Get content of changed item
-          var content = ({id: changedItem.payload.doc.id, ...changedItem.payload.doc.data()});
-          this.categoryItems.push(this.fb.control(content.text))
-          newList.push(content.id);
-          // Act according to the change type
-          if(changedItem.type == 'added') {
-            // If we do not yet have this item, add it
-            if(!this.categoryIDS.some(i => i.id == content.id)) {
-              this.itemsFormGroup.addControl(content.id, this.fb.control(content.text));
-              this.categoryIDS.push(content);
-            }
-            // If we do have this item, check if content is updated
-            else{
-              var controllerValue = this.itemsFormGroup.controls[content.id].value;
-              if(!(controllerValue == content.text)) {
-                this.itemsFormGroup.controls[content.id].setValue(content.text);
+            var newList: String[] = []
+            changes.map(changedItem => {
+              
+              // Get content of changed item
+              var content = ({id: changedItem.payload.doc['id'], ...changedItem.payload.doc.data()});
+              this.categoryItems.push(this.fb.control(content.text))
+              newList.push(content.id);
+              // Act according to the change type
+              if(changedItem.type == 'added') {
+                // If we do not yet have this item, add it
+                if(!this.categoryIDS.some(i => i.id == content.id)) {
+                  this.itemsFormGroup.addControl(content.id, this.fb.control(content.text));
+                  this.categoryIDS.push(content);
+                }
+                // If we do have this item, check if content is updated
+                else{
+                  var controllerValue = this.itemsFormGroup.controls[content.id].value;
+                  if(!(controllerValue == content.text)) {
+                    this.itemsFormGroup.controls[content.id].setValue(content.text);
+                  }
+                }
+                //this.categoryFormGroup.controls[content.id].setValue(content.text);
               }
+              if(changedItem.type =='modified') {
+                 this.itemsFormGroup.controls[content.id].setValue(content.text);
+                 this.categoryIDS.find(e => e.id == content.id).text = content.text;
+                 this.categoryIDS.find(e => e.id == content.id).orderNr = content.orderNr;
+              }
+              else {
+    
+              }
+    
             }
-            //this.categoryFormGroup.controls[content.id].setValue(content.text);
-          }
-          if(changedItem.type =='modified') {
-             this.itemsFormGroup.controls[content.id].setValue(content.text);
-             this.categoryIDS.find(e => e.id == content.id).text = content.text;
-             this.categoryIDS.find(e => e.id == content.id).orderNr = content.orderNr;
-          }
-          else {
+            // Delete all items not in the newlist
+    
+            ) 
+            this.categoryIDS.forEach((element, index) => {
+              if(!newList.includes(element.id) && !element.localOnly){
+                this.categoryIDS.splice(index, 1);
+                this.itemsFormGroup.removeControl(element.id);
+              }
+    
+            });
+            this.categoryIDS.sort((a,b) => a.orderNr - b.orderNr);
+            // Add an empty box in the bottom of the list in order to be able to edit
+            if(!this.bottomBoxAdded) {
+              this.addBottomBox();
+              this.bottomBoxAdded = true;
+            }
+          })
+    })
 
-          }
-
-        }
-        // Delete all items not in the newlist
-
-        ) 
-        this.categoryIDS.forEach((element, index) => {
-          if(!newList.includes(element.id) && !element.localOnly){
-            this.categoryIDS.splice(index, 1);
-            this.itemsFormGroup.removeControl(element.id);
-          }
-
-        });
-        this.categoryIDS.sort((a,b) => a.orderNr - b.orderNr);
-        // Add an empty box in the bottom of the list in order to be able to edit
-        if(!this.singleItemCategory && !this.bottomBoxAdded) {
-          this.addBottomBox();
-          this.bottomBoxAdded = true;
-        }
-      })
       
 
           // Get ID and nr
@@ -164,10 +131,13 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
   // Adds an empty box in the end of the screen
   // Does not add it to Firestore
   addBottomBox(){
+    // We should never add a bottom box to a single item category
+    if(!this.singleItemCategory){
     var newItemId: string = this.firestore.createId();
     // Add local control
     this.itemsFormGroup.addControl(newItemId,this.fb.control(""));
     this.categoryIDS.push(new CategoryItem("",newItemId,this.categoryIDS.length, true));
+    }
   }
 
   onItemChanged(val: any, categoryItem: CategoryItem) {
@@ -178,9 +148,10 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
     var orderNr =  this.categoryIDS.find(e => e.id == categoryItem.id).orderNr;
     // Make sure not local only
     this.categoryIDS.find(e => e.id == categoryItem.id).localOnly = false;
-    this.categoryService.updateItem(this.category, categoryItem.id, val.target.value, orderNr);
+    this.categoryService.updateItem(this.category, categoryItem.id, val.target.value, orderNr, this.project);
 
   }
+
   clickFunction(val: any) {
     // Find current value and see if it is empty. If user clicks on an empty field, add a new one.
     var currentValue = val.target.value;
@@ -204,12 +175,12 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
         }
         // If from firestore, delete from server
         else {
-        this.categoryService.deleteItem(this.category, categoryItem.id);
+        this.categoryService.deleteItem(this.category, categoryItem.id, this.project);
         var orderNr =  this.categoryIDS.find(e => e.id == categoryItem.id).orderNr;
         this.categoryIDS.forEach(element => {
           if(element.orderNr > orderNr && !element.localOnly) {
             var newOrderNr = element.orderNr-1;
-            this.categoryService.updateItem(this.category, element.id, element.text, newOrderNr);
+            this.categoryService.updateItem(this.category, element.id, element.text, newOrderNr, this.project);
           }
         });}
         //this.categoryItems.removeAt(id);
@@ -240,12 +211,5 @@ export class CategoryBoxComponent implements AfterViewInit, OnInit {
   }
   addCategoryItem(){
     this.categoryItems.push(this.fb.control(''));
-  }
-
-  AddItem(item: String) {
-
-  }
-  UpdateItem(item: String) {
-
   }
 }

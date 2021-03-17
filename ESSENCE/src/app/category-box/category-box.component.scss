@@ -1,23 +1,26 @@
-$product-view-color: rgb(179, 24, 24);
-$project-view-color: rgb(51, 146, 27);
-$paradigm-view-color: rgb(216, 190, 40);
+$product-view-color: rgb(212, 59, 59);
+$project-view-color: rgb(50, 136, 29);
+$paradigm-view-color: rgb(241, 197, 50);
 $process-view-color: #369;
 .categoryContainer {
-    border: 5px;
-    padding: 0px;
-    margin: 0px;
-    border-style: solid;
     justify-content: center;
     height: 100%;
-    background-color: rgb(241, 240, 240);
+    background-color: rgb(241, 241, 241);
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+}
+
+.card-body {
+    border-style: solid;
+    border: 2px;
 }
 
 h2 {
     font-size: 20px;
+}
+
+.card-header {
+    height: fit-content;
+    padding: 7px;
 }
 
 .itemsRow {
@@ -36,20 +39,40 @@ h2 {
     padding: 0px;
 }
 
-.product {
+.card-header.product {
+    background-color: $product-view-color;
     border-color: $product-view-color;
 }
 
-.process {
+.categoryContainer.product {
+    background-color: $product-view-color;
+}
+
+.card-header.process {
+    background-color: $process-view-color;
     border-color: $process-view-color;
 }
 
-.paradigm {
+.categoryContainer.process {
+    background-color: $process-view-color;
+}
+
+.card-header.paradigm {
+    background-color: $paradigm-view-color;
     border-color: $paradigm-view-color;
 }
 
-.project {
+.categoryContainer.paradigm {
+    background-color: $paradigm-view-color;
+}
+
+.card-header.project {
+    background-color: $project-view-color;
     border-color: $project-view-color;
+}
+
+.categoryContainer.project {
+    background-color: $project-view-color;
 }
 
 .titleBox {
@@ -60,18 +83,19 @@ h2 {
 }
 
 .titleText {
-    justify-content: center;
     display: flex;
     font-size: 20px;
     margin: 0px;
+    color: rgb(255, 255, 255);
 }
 
 .itemsBox {
     overflow: auto;
-    margin-left: 10px;
+    padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 3px;
     margin-top: 3px;
+    padding-top: 0px;
 }
 
 .contentcol {

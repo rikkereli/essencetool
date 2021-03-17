@@ -1,0 +1,1 @@
+export const passwordResetMessage = "Password reset email sent, check your inpox";

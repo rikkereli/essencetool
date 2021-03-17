@@ -1,77 +1,112 @@
-<div class="container maincontainer">
-    <div class="row outerRow">
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [category]="challenge" [boxView]="paradigmView" [title]="challengeTitle" [singleItemCategory]="true" [items]="challengeItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [category]="problem" [boxView]="paradigmView" [singleItemCategory]="true" [title]="problemTitle" [items]="problemItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
+<div class="contentContainer">
+    <div class="buffer1"></div>
+    <div class="categoryContainer">
+        <div class="buffer"></div>
+        <div class="categoryRow">
+            <app-category-box class="categoryBox" [appAutoGrow]="rationale" [category]="rationale"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="challenge" [category]="challenge" [singleItemCategory]="true"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="leverage" [category]="leverage" [singleItemCategory]="true"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="prospect" [category]="prospect" [singleItemCategory]="true"></app-category-box>
         </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="leverage" [categoryRef]="leverageCategoryRef" [boxView]="productView" [title]="leverageTitle" [items]="leverageItems"></app-category-box>
+        <div class="categoryRow">
+            <app-category-box class="categoryBox" [appAutoGrow]="strategy" [category]="strategy"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="element" [category]="element"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="architecture" [category]="architecture" [singleItemCategory]="true"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="qualifier" [category]="qualifier" [singleItemCategory]="true"></app-category-box>
         </div>
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [category]="prospect" [boxView]="projectView" [title]="prospectTitle" [singleItemCategory]="true" [items]="prospectItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [category]="warrant" [boxView]="projectView" [title]="warrantTitle" [items]="warrantItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared3">
-                        <app-category-box [category]="backing" [boxView]="projectView" [title]="backingTitle" [items]="backingItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
+        <div class="categoryRow">
+            <app-category-box class="categoryBox" [appAutoGrow]="tactic" [category]="tactic"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="scenario" [category]="scenario"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="feature" [category]="feature" [singleItemCategory]="true"></app-category-box>
+            <app-category-box class="categoryBox" [appAutoGrow]="valueproposition" [category]="valueproposition" [singleItemCategory]="true"></app-category-box>
         </div>
 
     </div>
-    <div class="row outerRow">
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="element" [boxView]="paradigmView" [title]="elementsTitle" [items]="elementsItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="architecture" [boxView]="productView" [title]="architectureTitle" [items]="architectureItems"></app-category-box>
-        </div>
-        <div class="col-sm-4">
-            <div class="container sharedContainer" height="inherit">
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [category]="qualifier" [boxView]="projectView" [title]="qualifierTitle" [items]="qualifierItems"></app-category-box>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 shared2">
-                        <app-category-box [category]="rebuttal" [boxView]="projectView" [title]="rebuttalTitle" [items]="rebuttalItems"></app-category-box>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row outerRow">
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="scenario" [boxView]="paradigmView" [title]="scenariosTitle" [items]="scenariosItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="feature" [boxView]="productView" [title]="featuresTitle" [items]="featuresItems"></app-category-box>
-        </div>
-        <div class="col-sm-4 shared1">
-            <app-category-box [category]="valueproposition" [boxView]="projectView" [title]="valuePropositionsTitle" [items]="valuePropositionsItems"></app-category-box>
-        </div>
-
-
-
-    </div>
+    <div class="buffer1"></div>
 </div>
+<!--<div class="container categoryContainer">
+    <div class="row outerRow">
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="rationale"></app-category-box>
+        </div>
+        <div class="col-sm-3">
+            <div class="container sharedContainer" height="inherit">
+                <div class="row">
+                    <div class="col-sm-12 shared2">
+                        <app-category-box [category]="challenge" [singleItemCategory]="true"></app-category-box>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 shared2">
+                        <app-category-box [category]="problem" [singleItemCategory]="true"></app-category-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 shared1">
+            <app-category-box [category]="leverage"></app-category-box>
+        </div>
+        <div class="col-sm-3">
+            <div class="container sharedContainer" height="inherit">
+                <div class="row">
+                    <div class="col-sm-12 shared3">
+                        <app-category-box [category]="prospect" [singleItemCategory]="true"></app-category-box>
+                    </div>
+                </div>
+                <div class=" row ">
+                    <div class="col-sm-12 shared3 ">
+                        <app-category-box [category]="warrant "></app-category-box>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-12 shared3 ">
+                        <app-category-box [category]="backing"></app-category-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row outerRow ">
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="strategy"></app-category-box>
+        </div>
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="element "></app-category-box>
+        </div>
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="architecture"></app-category-box>
+        </div>
+        <div class="col-sm-3 ">
+            <div class="container sharedContainer " height="inherit ">
+                <div class="row ">
+                    <div class="col-sm-12 shared2 ">
+                        <app-category-box [category]="qualifier "></app-category-box>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-12 shared2 ">
+                        <app-category-box [category]="rebuttal"></app-category-box>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row outerRow ">
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="tactic "></app-category-box>
+        </div>
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="scenario"></app-category-box>
+        </div>
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="feature"></app-category-box>
+        </div>
+        <div class="col-sm-3 shared1 ">
+            <app-category-box [category]="valueproposition"></app-category-box>
+        </div>
+    </div>
+    Buffer added to make bottom look better
+    <div class="buffer row"></div>
+</div>
+-->

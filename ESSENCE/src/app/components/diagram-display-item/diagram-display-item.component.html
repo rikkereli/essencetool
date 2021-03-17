@@ -1,0 +1,8 @@
+<div class="card" *ngIf="diagram$ | async as diagram">
+    <div class="card-body">
+        <h5 class="card-title cardText">
+            {{(diagram.projectName) ? diagram.projectName : 'No name available'}}
+        </h5>
+        <a [routerLink]="['/dashboard/diagramTool',diagramID]" class="stretched-link"></a>
+    </div>
+</div>

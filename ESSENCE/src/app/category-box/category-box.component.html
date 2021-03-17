@@ -1,41 +1,10 @@
-<div class="categoryContainer" *ngIf="category$ | async as category" [ngClass]="category.view" [formGroup]="categoryFormGroup">
-    <div class="row titleBox">
-        <div class="titleBox">
-            <h1 class="titleText"> {{category.displayTitle}}</h1>
-        </div>
+<div  class="card  categoryContainer" *ngIf="category$ | async as category" [formGroup]="categoryFormGroup" [ngClass]="category.view">
+    <div class="card-header" [ngClass]="category.view">
+        <h4 class="mb-0 titleText"> {{category.displayTitle}}</h4>
     </div>
-    <div class="itemsBox flex-grow-1" [formGroup]=itemsFormGroup>
+    <div class="card-body itemsBox flex-grow-1" [formGroup]=itemsFormGroup [ngClass]="category.view">
         <div *ngFor="let item of categoryIDS">
             <app-category-item (change)="onItemChanged($event, item)" (focusout)="clickOutsideFunction($event, item)" (focusin)="clickFunction($event)" [formControlName]="item.id"> </app-category-item>
         </div>
     </div>
-
-    <!--
-    <div class="itemsBox flex-grow-1" formArrayName="categoryItems">
-        <div *ngFor="let item of categoryItems.controls; let i=index">
-            <app-category-item (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [formControlName]="i"> </app-category-item>
-        </div>
-    </div>
-    -->
-    <!--
-    <div class="itemsBox flex-grow-1" formArrayName="categoryItems">
-        <div *ngFor="let item of categoryItems$ | async">
-            <app-category-item (change)="onItemChanged" (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [id]="item.id" [text]=item.text> </app-category-item>
-        </div>
-    </div>
--->
-    <!--
-    <div class="itemsBox flex-grow-1" formArrayName="categoryItems">
-        <div *ngFor="let item of categoryItems$ | async">
-            <app-category-item (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [text]=item.text> </app-category-item>
-        </div>
-    </div>
-    -->
-    <!--
-    <div class="itemsBox flex-grow-1" formArrayName="categoryItems">
-        <div *ngFor="let item of categoryItems.controls; let i=index">
-            <app-category-item (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [formControlName]="i"> </app-category-item>
-        </div>
-    </div>
-    -->
 </div>

@@ -1,0 +1,64 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" href="#">{{title}}</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-light" routerLink="home" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" routerLink="diagramOverview" mdbWavesEffect>Diagrams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect routerLink="profile">
+                    <i class="fas fa-user"></i>User Profile
+                </a>
+            </li>
+            <!-- Calling SignOut() Api from AuthService -->
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" (click)="authService.SignOut()" mdbWavesEffect>
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                </a>
+            </li>
+
+        </ul>
+        <!-- Links -->
+
+
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<!-- Top navigation 
+<div class="navbar">
+    <span class="nav navbar-nav"> {{title}} </span>
+    <div class="dropdown">
+        <button class="dropbtn">
+            Menu <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a class="nav-link" routerLink="home">Home</a>
+            <a class="nav-link" routerLink="diagramTool">Diagram</a>
+            <a class="nav-link active">
+                <i class="fas fa-user"></i>User Profile
+            </a>
+             Calling SignOut() Api from AuthService 
+
+            <a class="nav-link" (click)="authService.SignOut()">
+                <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+
+        </div>
+
+    </div>
+</div>
+-->
+<router-outlet></router-outlet>

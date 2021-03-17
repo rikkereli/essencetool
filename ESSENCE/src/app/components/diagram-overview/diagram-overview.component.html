@@ -1,0 +1,24 @@
+<!-- Main content -->
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="inner-adjust">
+
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Diagrams</h1>
+        </div>
+
+        <!--Create new project-->
+        <div class="card addProjectCard">
+            <div class="card-body">
+                <input mdbInput type="text" placeholder="Enter project name" #inputProjectName>
+                <button class="cardText" (click)="createNewProject(inputProjectName.value)" mdbBtn>New project</button>
+            </div>
+        </div>
+        <!--Button for each item-->
+        <div *ngIf="categoryService.categoriesData as categories">
+            <div *ngFor="let category of categories">
+                <app-diagram-display-item [diagramID]="category.projectId"></app-diagram-display-item>
+            </div>
+        </div>
+        <!-- Show user data when logged in -->
+    </div>
+</main>

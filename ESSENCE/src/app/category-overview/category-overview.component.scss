@@ -1,6 +1,27 @@
+p {
+    font-family: Lato;
+}
+
+.mqInfo {
+    padding-left: 25px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.mqInfo>span {
+    padding-left: 0;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.8em;
+}
+
+.mqInfo>span::before {
+    content: attr(title) ": ";
+}
+
 app-category-box {
     height: inherit;
     width: inherit;
+    padding: 10px;
 }
 
 // Defines the height of a column by how many categories are shared in this row
@@ -8,10 +29,46 @@ app-category-box {
     height: 300px;
 }
 
-.maincontainer {
+.categoryBox {
+    flex-grow: 3;
+}
+
+.categoryContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    flex-grow: 3;
+    max-width: 1000px;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    height: inherit;
     border-style: solid;
     border: 2px;
-    border-color: gray;
+    height: 300px;
+    border-color: rgb(32, 36, 47);
+}
+
+.buffer {
+    height: 30px;
+}
+
+.buffer1 {
+    width: 30px;
+    flex: 0;
+    flex-grow: 0;
 }
 
 .shared1,
