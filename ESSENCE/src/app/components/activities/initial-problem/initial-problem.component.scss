@@ -1,0 +1,58 @@
+$paradigm-view-color: rgb(241, 197, 50);
+.box {
+    padding-top: 20px;
+    border: 2px;
+}
+
+h4 {
+    color: white;
+}
+
+.modal-title {
+    color: black;
+}
+
+mat-icon {
+    color: white;
+    height: inherit;
+    width: inherit;
+}
+
+.helpButton {
+    color: transparent;
+    background-color: transparent;
+}
+
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.problemHeader {
+    border: 5px;
+    flex-direction: row;
+    display: flex;
+}
+
+h1 {
+    color: white;
+}
+
+.errors {
+    padding-top: 10px;
+}
+
+.problemContainer {
+    width: 300px;
+    margin: 10px;
+}
+
+.problemContent {
+    height: 100%;
+    width: 100%;
+}
+
+.problemBody {
+    height: 200px;
+    width: 300px;
+}

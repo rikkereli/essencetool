@@ -1,0 +1,49 @@
+<div class="contentHolder">
+    <div>
+        <h3 class="welcome">Welcome to the ESSENCE toolbox.</h3>
+    </div>
+    <div class="displayTable content">
+        <div class="displayTableCell">
+
+            <div class="authBlock">
+                <h3>Sign In</h3>
+                <div class="formGroup">
+                    <input matInput type="text" value="Rikkereli@gmail.com" class="formControl" placeholder="Username" #userName required>
+                </div>
+
+                <div class="formGroup">
+                    <input type="password" value="123456" class="formControl" placeholder="Password" #userPassword required>
+                </div>
+
+                <!-- Calling SignIn Api from AuthService -->
+                <div class="formGroup">
+                    <button class="btn btnPrimary" (click)="authService.SignIn(userName.value, userPassword.value)">
+                        Log in
+                    </button>
+
+                </div>
+
+                <div class="formGroup">
+                    <span class="or"><span class="orInner">Or</span></span>
+                </div>
+
+                <!-- Calling GoogleAuth Api from AuthService -->
+                <div class="formGroup">
+                    <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+            <i class="fab fa-google-plus-g"></i>
+            Log in with Google
+          </button>
+                </div>
+
+                <div class="forgotPassword">
+                    <span routerLink="/forgot-password">Forgot Password?</span>
+                </div>
+            </div>
+
+            <div class="redirectToLogin">
+                <span>Don't have an account?<span class="redirect link" routerLink="/register-user"> Sign Up</span></span>
+            </div>
+
+        </div>
+    </div>
+</div>

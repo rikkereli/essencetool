@@ -1,0 +1,43 @@
+<ng-template #content let-modal>
+    <div *ngIf="challengeInfo$ | async as challengeInfo">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Filling out
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
+  
+            <span aria-hidden="true"> 
+                × 
+            </span> 
+        </button>
+        </div>
+        <div class="modal-body">
+            <div id="scroll" [innerHTML]="challengeInfo.description"></div>
+        </div>
+    </div>
+</ng-template>
+<div *ngIf="formGroup" [formGroup]="formGroup" id="contentContainer" class="contentContainer">
+    <h3>{{navbarService.currentPageDetails.title}}</h3>
+    <div class="card challengeBox" [ngClass]="paradigm">
+        <div class="card-header challengeHeader">
+            <h4>Challenge</h4>
+            <div class="example-button-container">
+                <button class="helpButton" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
+                    <mat-icon>help</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="card-body challengeBody">
+            <textarea id="chal" formControlName="challenge" class="challengeContent" (input)="updateChallenge($event)"></textarea>
+        </div>
+    </div>
+    <div class="errors" *ngIf="challenge.invalid">
+        <div *ngIf="challenge.errors.minlength">
+            <h4>{{minLengthErrorMessage}}</h4>
+        </div>
+        <div *ngIf="challenge.errors.required">
+            <h4>{{requiredErrorMessage}}</h4>
+        </div>
+    </div>
+    <app-next-activity *ngIf="challenge.valid" (click)="nextActivity()"></app-next-activity>
+</div>

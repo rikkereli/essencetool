@@ -5,4 +5,6 @@ export class Category {
   view: string; 
   id: string;
   singleItemCategory: boolean;
+  tooltip: string;
+  description: string;
 }

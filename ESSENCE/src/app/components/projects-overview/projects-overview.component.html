@@ -1,0 +1,21 @@
+<!-- Main content -->
+<div class="contentContainer">
+
+    <div class="titleBox">
+        <h1 class="title">Your projects</h1>
+        <h2 class="title">Select an existing project or create a new one</h2>
+    </div>
+
+    <!--Create new project-->
+    <div class="card projects addproject">
+        <div class="addProjectCard card-body">
+            <input (keydown)="keyDown($event)" class="newProjectInput" mdbInput type="text" placeholder="Enter project name" #inputProjectName>
+            <button class="cardText" (click)="createNewProject(inputProjectName.value)" mdbBtn>New project</button>
+        </div>
+    </div>
+    <!--Button for each item-->
+    <div class="projects" *ngFor="let category of projectService.projectsData">
+        <app-project-display-item [diagramID]="category.projectId"></app-project-display-item>
+    </div>
+    <!-- Show user data when logged in -->
+</div>

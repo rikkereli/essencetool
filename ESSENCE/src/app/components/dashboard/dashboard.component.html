@@ -1,30 +1,88 @@
+<ng-template #help let-modal>
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Filling
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
+  
+            <span aria-hidden="true"> 
+                × 
+            </span> 
+        </button>
+        </div>
+        <div class="modal-body">
+            <div id="scroll" [innerHTML]="navbarService.currentPageDetails.help"></div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #invite let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Invite user to project
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
+  
+            <span aria-hidden="true"> 
+                × 
+            </span> 
+        </button>
+    </div>
+    <div class="modal-body">
+        <input id="emailInput" placeholder="Enter user email">
+        <button class="modal-button" (click)="inviteUserToProject()">
+            Invite
+        </button>
+    </div>
+</ng-template>
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">{{title}}</a></mdb-navbar-brand>
+    <mdb-navbar-brand><span class="navbar-brand title">{{navbarService.currentTitle}}</span></mdb-navbar-brand>
 
     <!-- Collapsible content -->
-    <links>
+    <links class="links">
 
         <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" routerLink="home" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+        <ul class="navbar-nav ml-auto ">
+            <li class="nav-item" title="Go to projects overview" *ngIf="!navbarService.onProjects">
+                <a class="nav-link waves-light" (click)="goToProjects()" routerLink="/dashboard" mdbWavesEffect>
+                    Projects
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" routerLink="diagramOverview" mdbWavesEffect>Diagrams</a>
+            <li class="nav-item" title="Getting lost? Get instructions here!">
+                <a (click)="getHelp(help)" class="nav-link waves-light" mdbWavesEffect>
+                    <mat-icon aria-hidden="false">help</mat-icon>
+
+                </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect routerLink="profile">
-                    <i class="fas fa-user"></i>User Profile
+            <li class="nav-item" title="Open diagram overview" *ngIf="navbarService.onProjectActivityPage" (click)="openDiagram()">
+                <a class="nav-link waves-light" mdbWavesEffect>
+                    <mat-icon aria-hidden="false">map</mat-icon>
+
+                </a>
+            </li>
+            <li class="nav-item" title="Print project status" *ngIf="navbarService.onProjectActivityPage">
+                <a (click)="exportAsPdf()" class="nav-link waves-light" mdbWavesEffect>
+                    <mat-icon aria-hidden="false">print</mat-icon>
+
+                </a>
+            </li>
+            <li class="nav-item" title="Add user to the team" *ngIf="navbarService.onProjectActivityPage">
+                <a class="nav-link waves-light" mdbWavesEffect (click)="addUserToProject(invite)">
+                    <mat-icon aria-hidden="false">person_add</mat-icon>
+                </a>
+            </li>
+            <li class="nav-item" title="View account">
+                <a class="nav-link waves-light" (click)="goToProfile()" mdbWavesEffect routerLink="profile" *ngIf="!navbarService.onProfile">
+                    <mat-icon aria-hidden="false">account_circle</mat-icon>
                 </a>
             </li>
             <!-- Calling SignOut() Api from AuthService -->
-
-            <li class="nav-item">
+            <li class="nav-item" title="Log out of website">
                 <a class="nav-link waves-light" (click)="authService.SignOut()" mdbWavesEffect>
-                    <i class="fas fa-sign-out-alt"></i> Log out
+                    <mat-icon aria-hidden="false">logout</mat-icon>
                 </a>
             </li>
 
@@ -36,29 +94,5 @@
     <!-- Collapsible content -->
 
 </mdb-navbar>
-<!--/.Navbar-->
-<!-- Top navigation 
-<div class="navbar">
-    <span class="nav navbar-nav"> {{title}} </span>
-    <div class="dropdown">
-        <button class="dropbtn">
-            Menu <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <a class="nav-link" routerLink="home">Home</a>
-            <a class="nav-link" routerLink="diagramTool">Diagram</a>
-            <a class="nav-link active">
-                <i class="fas fa-user"></i>User Profile
-            </a>
-             Calling SignOut() Api from AuthService 
 
-            <a class="nav-link" (click)="authService.SignOut()">
-                <i class="fas fa-sign-out-alt"></i>Log out
-            </a>
-
-        </div>
-
-    </div>
-</div>
--->
 <router-outlet></router-outlet>

@@ -6,6 +6,26 @@
 
 /* to format valid/invalid inputs */
 
+$product-view-color: rgb(212, 59, 59);
+$project-view-color: rgb(50, 136, 29);
+$paradigm-view-color: rgb(241, 197, 50);
+$process-view-color: #369;
+.paradigm {
+    background-color: $paradigm-view-color!important;
+}
+
+.process {
+    background-color: $process-view-color!important;
+}
+
+.project {
+    background-color: $project-view-color!important;
+}
+
+.product {
+    background-color: $product-view-color!important;
+}
+
 
 /* width */
 
@@ -65,11 +85,33 @@ body {
     background-color: rgb(32, 36, 47)!important;
 }
 
-* {
-    color: white;
+.backdrop {
+    background-color: rgb(150, 150, 150)!important;
+    opacity: 0.1;
+}
+
+mat-dialog-container {
+    background-color: rgb(53, 57, 68)!important;
 }
 
 
 /* Importing Bootstrap SCSS file. */
 
 @import '~bootstrap/scss/bootstrap';
+$product-view-color: rgb(212, 59, 59);
+$project-view-color: rgb(50, 136, 29);
+$paradigm-view-color: rgb(241, 197, 50);
+$process-view-color: #369;
+.contentContainer {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+    width: 100%;
+}

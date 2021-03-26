@@ -1,4 +1,46 @@
 .navbar {
     color: black!important;
     background-color: blanchedalmond!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px!important;
+    max-height: 60px!important;
+}
+
+.navbar-collapse {
+    height: fit-content!important;
+}
+
+.modal-title {
+    color: black;
+}
+
+.diagram {
+    background-color: rgb(32, 36, 47);
+}
+
+.text {
+    color: black;
+}
+
+mat-toolbar {
+    color: white;
+}
+
+navbar-collapse {
+    height: fit-content!important;
+}
+
+.collapse {
+    height: fit-content!important;
+}
+
+.title {
+    flex-grow: 5;
+}
+
+.links {
+    flex-grow: 1;
 }

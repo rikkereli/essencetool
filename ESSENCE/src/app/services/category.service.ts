@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 import * as ids from '../assets/vars';
-import { Category, CategoryItem } from '../model';
-import { Diagram } from '../model/diagram';
+import { Category, CategoryItem, Status } from '../model';
+import { Project, ProjectStage } from '../model/project';
 import { DiagramReference } from '../model/diagramReference';
 @Injectable({
   providedIn: 'root'
@@ -11,48 +10,25 @@ import { DiagramReference } from '../model/diagramReference';
 
 // Service should retrieve and update the content of a category
 export class CategoryService {
-  categoriesData: any;
 
   constructor(private firestore: AngularFirestore) { 
-    this.firestore.collection("users").doc("${user.uid}").collection<DiagramReference>(ids.diagramsCollection).valueChanges().subscribe(
-      userdata => {
-        if(userdata) {
-          this.categoriesData = userdata;
-        }
-        else {
-          this.categoriesData = null;
-        }
-      }
-    );
+    
   }
 
-  addNewProject(projectName: string) {
-        // Get current user
-        const user = JSON.parse(localStorage.getItem('user'));
-    // Project ID
-    var projectID = this.firestore.createId();
-    this.firestore.collection(ids.usersCollection).doc("${user.uid}").collection(ids.diagramsCollection).add({projectId: projectID});
-    this.firestore.collection(ids.diagramsCollection).doc(projectID).set(
-      {projectName: projectName});
-    // As challenge, problem and prospect are single item categories, we need to add an empty field to each
-    this.firestore.collection(ids.diagramsCollection).doc(projectID).collection(ids.challenge).add({text:"", orderNr: 1});
-    this.firestore.collection(ids.diagramsCollection).doc(projectID).collection(ids.problem).add({text:"", orderNr: 1});
-    this.firestore.collection(ids.diagramsCollection).doc(projectID).collection(ids.prospect).add({text:"", orderNr:1});
-  }
-  getDiagram(diagramId: string) {
-    return this.firestore.collection(ids.diagramsCollection).doc<Diagram>(diagramId);
+  getInformation(category: string) {
+    return this.firestore.collection(ids.categoriesCollection).doc<Category>(category);
   }
 
   // Returns reference to the category of chosen diagram
-  getCategoryItems(category: string, project: string) {
-    return this.firestore.collection(ids.diagramsCollection).doc(project).collection<CategoryItem>(category, ref => ref.orderBy("orderNr"));
+  getCategoryItems(category: string) {
+    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<CategoryItem>(category, ref => ref.orderBy("orderNr"));
   }
   // Retrieve an overview of diagrams for this user
   getUserDiagrams(){
     // Get current user
     const user = JSON.parse(localStorage.getItem('user'));
 
-    return this.firestore.collection("users").doc("${user.uid}").collection<DiagramReference>(ids.diagramsCollection);
+    return this.firestore.collection(ids.connectedDiagramsCollection).doc(user.uid).collection<DiagramReference>(ids.diagramsCollection);
   }
 
   /* Get all items for the category as CategoryItem
@@ -64,17 +40,33 @@ export class CategoryService {
   }
   */
   getCategory(category: string) {
-    return this.firestore.collection(ids.categories).doc<Category>(category).valueChanges();
+    return this.firestore.collection(ids.categoriesCollection).doc<Category>(category).valueChanges();
   }
 
-  addItem(category: string, nr: number, project: string){
-    this.firestore.collection(ids.diagramsCollection).doc(project).collection(category).add({text:"", orderNr:nr});
+
+  getChallenge() {
+    return this.challengeRef().valueChanges();
   }
 
-  updateItem(category: string, itemId: string, text: string, nr:number, project: string) {
-    this.firestore.collection(ids.diagramsCollection).doc(project).collection(category).doc(itemId).set({text:text, orderNr:nr});
+  updateChallenge(value: string) {
+    this.challengeRef().get().subscribe(doc => doc.forEach(doc => this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic).doc(doc.id).update({text:value})));
   }
-  deleteItem(category: string, itemId: string, project: string){
-    this.firestore.collection(ids.diagramsCollection).doc(project).collection(category).doc(itemId).delete();
+  challengeRef() {
+    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic, ref => ref.where("subcategory", '==', "challenge").limit(1));
+  }
+
+  getSubCategory(subCategory: string) {
+    return this.subCategoryRef(subCategory).valueChanges();
+  }
+
+  updateSubCategory(value: string, subCategory: string) {
+    this.subCategoryRef(subCategory).get().subscribe(doc => doc.forEach(doc => this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic).doc(doc.id).update({text:value})));
+  }
+  subCategoryRef(subCategory: string) {
+    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic, ref => ref.where("subcategory", '==', subCategory).limit(1));
+  }
+  // Gets the current project ID from localstorage
+  getCurrentProject() {
+    return JSON.parse(localStorage.getItem('project'));
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoryBoxComponent } from './category-box/category-box.component'
+import { CategoryBoxComponent } from './components/utilities/category-box/category-box.component'
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {TextFieldModule} from '@angular/cdk/text-field';

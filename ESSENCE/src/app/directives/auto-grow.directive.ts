@@ -1,4 +1,5 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { Categories } from '../assets/categories';
 import { ResizeService } from '../services/resize.service';
 @Directive({
   selector: '[appAutoGrow]',
@@ -6,71 +7,50 @@ import { ResizeService } from '../services/resize.service';
 })
 export class AutoGrowDirective {
 
-  constructor(
-    private el: ElementRef,
-    private resizeService: ResizeService) {
-    this.resizeService.mouseoverObject.subscribe(
-      value => {
-        console.log("Currenthover on" + this.appAutoGrow + " is " + value.currentHover);
-        if(value.currentHover !== "") {
-        if(this.appAutoGrow !== value.currentHover) {
-          //this.height="70%";
-          //this.width ="70%";
-        }
-        else {
-          this.height="120%";
-          this.width="120%";
-        }
-        }
-        else {
-          this.height = "inherit";
-          this.width = "inherit";
-        }
+  @Input() appAutoGrow;
+  // The opacity that dimmed items should have
+  fadedOpacity = 0.3;
 
+  categories: Categories = new Categories();
+  constructor(
+    private resizeService: ResizeService) {
+      // Initiate connectedCategories
+      this.resizeService.mouseoverObject.subscribe(
+      value => {
+        if(value.currentHover === "") {
+          // If mouse is currently not over any item, the category should be solid
+          this.opacity = 1;
+        }
+        else {
+          if(this.appAutoGrow === value.currentHover) {
+            // The current mouseover item should always be solid
+              this.opacity = 1;
+          }
+          else {
+            // See if this category is connected to mouseover category
+            let inList = this.categories.areConnected(value.currentHover, this.appAutoGrow);
+            if(inList) {
+              this.opacity = 1;
+            }
+            else {
+              this.opacity = this.fadedOpacity;
+            }
+          }
+        }
       }
     )
   }
 
-  classname: string;
-  onStorageChange(ev:KeyboardEvent) {
-
-  }
-
-  @Input() appAutoGrow;
-  
-  autoGrow(parent: HTMLElement, classname: string) {
-    if (!parent) return;
-
-    // Find all child elements with selected class
-    const children = parent.getElementsByClassName(classname);
-    let elements = this.el.nativeElement.querySelectorAll(".categoryContainer");
-
-    if(!children) return;
-  }
-  ngAfterViewChecked(){
-    this.autoGrow(this.el.nativeElement, this.appAutoGrow);
-  }
-  //@HostBinding('style.height')
-  height = "inherit";
-
-  //@HostBinding('style.width')
-  width = "inherit";
-
-  @HostBinding('style.flex')
-  flex = 2;
-
-  @HostBinding('style.flex-grow')
-  flexgrow = 3;
+  @HostBinding('style.opacity')
+  opacity = 1;
 
 
+  // If mouse is over category, broadcast this to all categories
   @HostListener('mouseover') onMouseOver() {
     this.resizeService.mouseoverObject.next({currentHover: this.appAutoGrow});
-    this.flex = 1;
-    this.flexgrow = 5;
   }
+  // If mouse leaves category, broadcast to all categories
   @HostListener('mouseleave') onMouseLeave() {
     this.resizeService.mouseoverObject.next({currentHover:""});
-    this.flex = 2;
-    this.flexgrow = 3;
   }
 }

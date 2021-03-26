@@ -1,0 +1,32 @@
+h1 {
+    color: white;
+}
+
+.finish {
+    background-color: green;
+}
+
+.categoryBox {
+    height: 300px;
+}
+
+.beginButton {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    text-align: center;
+    padding: 10px;
+}
+
+.categoryRow {
+    padding: 20px;
+}
+
+mat-icon {
+    font-size: 20px;
+    display: block;
+    width: fit-content;
+    height: fit-content;
+}

@@ -1,0 +1,43 @@
+app-category-box {
+    box-sizing: border-box;
+    padding: 10px;
+    flex-grow: 1;
+    height: 250px;
+    flex: 1;
+}
+
+.contentContainer {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+    width: 100%;
+}
+
+h1 {
+    color: white;
+}
+
+.diagram {
+    background-color: rgb(8, 56, 189)!important;
+    color: rgb(161, 25, 173)!important;
+}
+
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    border-style: solid;
+    border: 2px;
+    height: fit-content;
+    width: inherit;
+    border-color: rgb(32, 36, 47);
+}

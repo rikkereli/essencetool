@@ -6,6 +6,8 @@ import * as messages from '../assets/messages';
 import { auth } from 'firebase/app';
 import * as routes from '../assets/routes';
 import { User } from '../model/user';
+import * as ids from '../assets/vars';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -108,6 +110,8 @@ export class AuthServiceService {
       photoURL: user.photoURL, 
       emailVerified: user.emailVerified
     }
+    // Update userEmail in diagramReferencelist so always up to date
+    this.firestore.collection(ids.connectedDiagramsCollection).doc(user.uid).set({email:user.email});
     return userRef.set(userData, {merge: true})
   }
 

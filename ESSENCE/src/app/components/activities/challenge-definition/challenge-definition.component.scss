@@ -1,0 +1,75 @@
+$paradigm-view-color: rgb(241, 197, 50);
+.contentContainer {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+    width: 100%;
+}
+
+.modal-title {
+    color: black;
+}
+
+h3 {
+    color: white;
+}
+
+a>* {
+    color: white;
+}
+
+.challengeBox {
+    background-color: $paradigm-view-color;
+    border-color: $paradigm-view-color;
+    padding-top: 20px;
+    border: 2px;
+}
+
+.challengeContent {
+    height: 100%;
+    width: 100%;
+}
+
+mat-icon {
+    color: white;
+    height: inherit;
+    width: inherit;
+}
+
+.helpButton {
+    color: transparent;
+    background-color: transparent;
+    height: fit-content;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+}
+
+.errors {
+    padding-top: 10px;
+}
+
+.challengeBody {
+    height: 200px;
+    width: 300px;
+}
+
+.challengeHeader {
+    border: 5px;
+    flex-direction: row;
+    display: flex;
+}
+
+h4 {
+    color: white;
+}

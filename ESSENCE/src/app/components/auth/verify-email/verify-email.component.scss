@@ -1,0 +1,64 @@
+h3 {
+    color: rgb(0, 0, 0);
+}
+
+span {
+    color: rgb(0, 0, 0);
+}
+
+button {
+    color: rgb(0, 0, 0);
+}
+
+.btnPrimary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(7, 7, 160);
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+    margin: 30px;
+}
+
+.authBlock {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome {
+    color: white;
+    padding: 20px;
+    justify-self: center;
+}
+
+.content {
+    border-radius: 25px;
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    border: 5px;
+    border-style: solid;
+    border-color: rgb(7, 7, 160);
+}
+
+input {
+    background-color: white!important;
+    border-radius: 5px;
+    border: 0px;
+    border-bottom: 1px;
+    padding: 5px;
+    margin: 8px;
+}
+
+.link {
+    color: rgb(7, 7, 160);
+    font-weight: 500;
+}
+
+.contentHolder {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}

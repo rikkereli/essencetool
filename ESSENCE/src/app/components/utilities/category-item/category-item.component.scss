@@ -1,0 +1,41 @@
+.textInput {
+    border-radius: 3px;
+    border-color: rgb(189, 187, 187);
+    flex-grow: 2;
+    flex-shrink: 2;
+}
+
+.subcategory {
+    color: white;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 1px;
+}
+
+.toogleActive {
+    height: inherit;
+}
+
+.input-group {
+    border-color: rgb(189, 187, 187);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.inactive {
+    font-style: italic;
+}
+
+.tooltip {
+    position: relative;
+    z-index: -1 !important;
+}
+
+.connectButton {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 10px;
+    height: inherit;
+    display: none;
+}

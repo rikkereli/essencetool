@@ -1,5 +1,0 @@
-<div class="itemsBox flex-grow-1" formArrayName="categoryItems">
-    <div *ngFor="let item of categoryItems.controls; let i=index">
-        <app-category-item class="textbox" (focusout)="clickOutsideFunction($event)" (focusin)="clickFunction($event)" [formControlName]="i"> </app-category-item>
-    </div>
-</div>

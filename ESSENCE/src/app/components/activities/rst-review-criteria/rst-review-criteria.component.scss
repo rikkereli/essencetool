@@ -1,0 +1,42 @@
+h1 {
+    color: white;
+}
+
+.beginButton {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    text-align: center;
+}
+
+.categoryBox {
+    height: 200px;
+}
+
+.categoryRow {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    border-style: solid;
+    border: 2px;
+    height: fit-content;
+    width: inherit;
+    border-color: rgb(32, 36, 47);
+}
+
+.finish {
+    background-color: green;
+}
+
+mat-icon {
+    font-size: 30px;
+    display: block;
+    width: fit-content;
+    height: fit-content;
+}

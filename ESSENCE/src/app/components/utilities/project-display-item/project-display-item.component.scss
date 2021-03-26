@@ -1,0 +1,57 @@
+.cardText {
+    color: black;
+    justify-content: center;
+}
+
+.deletebutton {
+    max-width: 100px;
+    height: 100%;
+    background-color: rgb(159, 176, 197);
+    border: 0px;
+    border-bottom-right-radius: 20px;
+}
+
+.modal-button {
+    background-color: rgb(197, 49, 49);
+    padding: 5px;
+    width: 150px;
+    border-radius: 5px;
+    color: white;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.text:focus {
+    border: 0px;
+}
+
+.projectButton {
+    flex-grow: 5;
+    height: inherit;
+}
+
+.deletebuttonContainer {
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    align-items: center;
+    display: flex;
+}
+
+h5 {
+    font-size: 15px;
+}
+
+.projectItem {
+    height: 70px;
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    border-bottom-right-radius: 20px;
+    justify-content: space-between;
+    align-items: center;
+}

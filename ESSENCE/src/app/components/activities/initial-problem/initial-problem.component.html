@@ -1,0 +1,75 @@
+<ng-template #content let-modal>
+    <div *ngIf="problemInfo$ | async as problemInfo">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Filling out
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
+  
+            <span aria-hidden="true"> 
+                × 
+            </span> 
+        </button>
+        </div>
+        <div class="modal-body">
+            <div id="scroll" [innerHTML]="problemInfo.description"></div>
+        </div>
+    </div>
+</ng-template>
+
+<div *ngIf="navbarService.currentPageDetails" [formGroup]="formGroup" id="contentContainer" class="contentContainer">
+    <h1 *ngIf="problem.invalid">{{navbarService.currentPageDetails.title}}</h1>
+    <h1 *ngIf="problem.valid && warrant.invalid">Describe what warrants the problem</h1>
+    <h1 *ngIf="problem.valid && warrant.valid">You can continue to next phase!</h1>
+    <div class="categoryRow">
+        <div class="problemContainer">
+            <div class="card box paradigm">
+                <div class="card-header problemHeader">
+                    <h4>Initial problem</h4>
+                    <div class="example-button-container">
+                        <button class="helpButton" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
+                    <mat-icon>help</mat-icon>
+                </button>
+                    </div>
+                </div>
+                <div class="card-body problemBody">
+                    <textarea class="problemContent" formControlName="problem" (input)="updateInitialProblem($event)"></textarea>
+                </div>
+            </div>
+            <div class="errors" *ngIf="problem.invalid">
+
+                <div *ngIf="problem.errors.minlength">
+                    <h4>{{minLengthErrorMessage}}</h4>
+                </div>
+                <div *ngIf="problem.errors.required">
+                    <h4>{{requiredErrorMessage}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="problemContainer" *ngIf="problem.valid">
+            <div class="card box project">
+                <div class="card-header problemHeader">
+                    <h4>Warrant</h4>
+                    <div class="example-button-container">
+                        <button class="helpButton" (click)="displayHelp(content)" mat-button>
+                    <mat-icon>help</mat-icon>
+                </button>
+                    </div>
+                </div>
+                <div class="card-body problemBody">
+                    <textarea class="problemContent" formControlName="warrant" (input)="updatelWarrant($event)"></textarea>
+                </div>
+            </div>
+            <div class="errors" *ngIf="warrant.invalid">
+
+                <div *ngIf="warrant.errors.minlength">
+                    <h4>{{warrantMinLengthErrorMessage}}</h4>
+                </div>
+                <div *ngIf="warrant.errors.required">
+                    <h4>{{warrantRequiredErrorMessage}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-next-activity *ngIf="warrant.valid" (click)="nextActivity()"></app-next-activity>
+</div>
