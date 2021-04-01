@@ -5,9 +5,17 @@ export const categoriesCollection = "categories";
 export const usersCollection = "users";
 export const diagramsCollection = "diagrams";
 export const connectedDiagramsCollection = "connectedDocuments";
+export const chosenFeaturesCollection = "chosenFeatures";
+export const criteriaCollection = "criteria";
+
+export const backlogCollection = "backlog";
+export const inProgressCollection = "inProgress";
+export const doneCollection = "done";
+
+export const collections = ["backlog", "inProgress", "done"];
 
 export const memebers = "members";
-export const categoriesArray = ["members","problematic","resolution","qualification","leverage","challenge","problem","prospect","warrant","backing","element","architecture","qualifier","rebuttal","scenario","feature","valueproposition","tactic","strategy","rationale",]
+export const categoriesArray = ["comments", "ecologyObject", "members","problematic","resolution","qualification","leverage","challenge","problem","prospect","warrant","backing","element","architecture","qualifier","rebuttal","scenario","feature","valueproposition","tactic","strategy","rationale",]
 
 // Cateogy names
 export const problematic = "problematic";
@@ -29,7 +37,7 @@ export const valueproposition = "valueproposition";
 export const tactic = "tactic";
 export const strategy = "strategy";
 export const rationale = "rationale";
-
+export const comments = "comments";
 export const ecologyObject = "ecologyObject";
 export const leveragePoint = "leveragePoint";
 export const items = "items";

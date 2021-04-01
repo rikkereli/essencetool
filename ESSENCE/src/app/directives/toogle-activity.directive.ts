@@ -16,6 +16,7 @@ export class ToogleActivityDirective {
     private el: ElementRef,
     private resizeService: ResizeService
   ) { 
+
       this.resizeService.mouseoverObject.subscribe(
       value => {
         console.log(this.appToogleActivity + " notified " + value.currentHover);
@@ -41,6 +42,7 @@ export class ToogleActivityDirective {
         }
       }
       );
+    
   }
 
   @HostBinding('style.display')

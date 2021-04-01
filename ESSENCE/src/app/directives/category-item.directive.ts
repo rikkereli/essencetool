@@ -11,7 +11,7 @@ export class CategoryItemDirective implements OnInit {
   @Input() appCategoryItem: {itemId: string, parentCategory: string};
 
   lastFocusItem:{itemId: string, parentCategory: string};
-  itemConnections: string[];
+  itemConnections: string[] = [];
   categories: Categories = new Categories();
   constructor(
     private el: ElementRef,

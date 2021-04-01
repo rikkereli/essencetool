@@ -27,6 +27,8 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
 
   @Output() focusOnEmptyInputEvent = new EventEmitter<string>();
   @Output() focusOutOfEmptyInputEvent = new EventEmitter<CategoryItem>();
+  @Output() textChangedEvent = new EventEmitter<CategoryItem>();
+  @Output() itemStatusChangedEvent = new EventEmitter<CategoryItem>();
 
   connectTooltip = "Connect highlighted item to this item";
   // If we click on an empty box, send event to parent
@@ -61,26 +63,18 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-  itemStatus: string;
   ngOnInit(): void {
-    this.itemStatus = this.categoryItem.getStatus();
     this.categoryInfo = { itemId: this.categoryItem.id, parentCategory: this.parentCategory};
     if(this.categoryItem.subcategory) {
       this.subCategory$ = this.categoryService.getCategory(this.categoryItem.subcategory);
     }
   }
   formGroup;
-  createFormGroup() {
-    this.formGroup = this.fb.group({
-      text: ['']
-    })
-  }
-
-
   
   updateItemText(val: any) {
     this.categoryItem.text = val.target.value;
-    this.categoryItemService.updateItemText(this.categoryItem, this.parentCategory);
+
+    this.textChangedEvent.next(this.categoryItem);
   }
 
   toogleActive() {
@@ -90,6 +84,6 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
     else {
       this.categoryItem.status = Status.active;
     }
-    this.categoryItemService.updateItemStatus(this.categoryItem, this.parentCategory);
+    this.itemStatusChangedEvent.next(this.categoryItem);
   }
 }

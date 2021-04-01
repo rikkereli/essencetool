@@ -112,7 +112,7 @@ export class ProjectService {
     const user = JSON.parse(localStorage.getItem('user'));
     // Projects should always start on challenge detected
     this.firestore.collection(ids.diagramsCollection).doc(projectId).set(
-      {projectName: projectName, projectStage: routes.challengeDetected});
+      {projectName: projectName, projectStage: routes.challengeDetectedActivity});
     var projectRef = this.firestore.collection(ids.diagramsCollection).doc(projectId);
     // As challenge, problem and prospect are single item categories, we need to add an empty field to each
     projectRef.collection(ids.problematic).add({subcategory: ids.challenge, text:"", orderNr: 1, status: Status.active});
@@ -133,8 +133,8 @@ export class ProjectService {
   getProject(diagramId: string) {
     return this.firestore.collection(ids.diagramsCollection).doc<Project>(diagramId);
   }
-    // Gets the current project ID from localstorage
-    getCurrentProject() {
+  // Gets the current project ID from localstorage
+  getCurrentProject() {
       return JSON.parse(localStorage.getItem('project'));
-    }
+  }
 }

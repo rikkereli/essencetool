@@ -11,6 +11,7 @@ export const axixAlignmentActivity = "axisAlignment";
 export const prospectRepresentationActivity = "prospectRepresentation";
 export const prospectRepresentationExpansionActivity = "prospectRepresentationExpansion";
 export const sprintInitiationActivity = "sprintInitiation";
+export const sprintWorkActivity = "sprintWork";
 export const RSTReviewActivity = "RSTReview";
 export const RSTReviewGetCommentsActivity = "GetComments";
 export const RSTReviewGenerateCriteriaActivity = "GenerateCriteria";

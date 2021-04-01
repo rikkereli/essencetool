@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
+import {MatSelectModule} from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { CategoryBoxComponent } from './components/utilities/category-box/category-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule} from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { TextFieldModule} from '@angular/cdk/text-field';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryItemComponent } from './components/utilities/category-item/category-item.component';
 import {MatIconModule} from '@angular/material/icon'
 import { environment} from 'src/environments/environment';
-import { AuthServiceService } from "./services/auth-service.service";
+import { AuthService } from "./services/auth.service";
 import { AngularFireModule} from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -24,7 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxLoadingModule } from 'ngx-loading';
-
+import { HttpClientModule } from '@angular/common/http';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { AgGridModule } from 'ag-grid-angular';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -58,6 +60,18 @@ import { NavbarService } from './services/navbar.service';
 import { RstReviewCriteriaComponent } from './components/activities/rst-review-criteria/rst-review-criteria.component';
 import { RstReviewCommentsComponent } from './components/activities/rst-review-comments/rst-review-comments.component';
 import { RstReviewUpdateDiagramsComponent } from './components/activities/rst-review-update-diagrams/rst-review-update-diagrams.component';
+import { SprintInitiationComponent } from './components/activities/sprint-initiation/sprint-initiation.component';
+import { CriteriaOverviewComponent } from './components/utilities/criteria-overview/criteria-overview.component';
+import { SprintWorkComponent } from './components/activities/sprint-work/sprint-work.component';
+import { TaskComponent } from './components/kanban/task/task.component';
+import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TaskDialogComponent } from './components/kanban/task-dialog/task-dialog.component';
+import { KanbanBoardComponent } from './components/kanban/kanban-board/kanban-board.component';
+import { KanbanService } from './services/kanban.service';
+import { SwotitemComponent } from './components/utlities/swotitem/swotitem.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,13 +103,22 @@ import { RstReviewUpdateDiagramsComponent } from './components/activities/rst-re
     RstReviewComponent,
     RstReviewCriteriaComponent,
     RstReviewCommentsComponent,
-    RstReviewUpdateDiagramsComponent
+    RstReviewUpdateDiagramsComponent,
+    SprintInitiationComponent,
+    CriteriaOverviewComponent,
+    SprintWorkComponent,
+    TaskComponent,
+    TaskDialogComponent,
+    KanbanBoardComponent,
+    SwotitemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatGridListModule,
+    MatCardModule,
+    DragDropModule,
     MatDialogModule,
     MatToolbarModule,
     TextFieldModule,
@@ -109,15 +132,18 @@ import { RstReviewUpdateDiagramsComponent } from './components/activities/rst-re
     AngularFireAuthModule,
     MDBBootstrapModule.forRoot(),
     NavbarModule, 
-    WavesModule, 
+    WavesModule,
+    MatSelectModule, 
     ButtonsModule,
     MatIconModule,
     MatTooltipModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    MatInputModule
   ],
-  providers: [AuthServiceService, [ResizeService], [CategoryitemService], [NavbarService]],
+  providers: [AuthService, [KanbanService], [ResizeService], [CategoryitemService], [NavbarService]],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

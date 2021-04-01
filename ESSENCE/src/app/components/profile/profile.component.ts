@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -9,10 +9,13 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(    public authService: AuthServiceService, 
+  constructor(    public authService: AuthService, 
     public categoryService: CategoryService) { }
 
   ngOnInit(): void {
+  }
+  updateName(event) {
+    this.authService.updateName(event.target.value);
   }
 
 }

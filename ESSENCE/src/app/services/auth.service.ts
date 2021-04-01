@@ -13,7 +13,7 @@ import * as ids from '../assets/vars';
 })
 
 // Handles sign-in with username and password, sign-up with username and password, reset password, email verification, route protection using canActivate auth guard method
-export class AuthServiceService {
+export class AuthService {
   userData: any; // Saved logged in user data
   constructor(
     public firestore: AngularFirestore, // Inject Firestore service
@@ -40,6 +40,10 @@ export class AuthServiceService {
         JSON.parse(localStorage.getItem('user'));
       }
     });
+  }
+
+  updateName(name: string) {
+    this.firestoreAuth.currentUser.then(user => user.updateProfile({displayName: name}));
   }
   // Sign in with email/password
   SignIn(email, password) {

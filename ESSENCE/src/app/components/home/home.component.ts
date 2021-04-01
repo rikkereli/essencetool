@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   divisibleByThreeObservable: BehaviorSubject<{isDivisibleByThree:boolean, number:number}>;
   constructor(
-    public authService: AuthServiceService, 
+    public authService: AuthService, 
     public categoryService: CategoryService
   ) { }
 

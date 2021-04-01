@@ -5,6 +5,8 @@ import * as ids from '../../../assets/vars';
 import * as routes from '../../../assets/routes';
 import { ProjectService } from 'src/app/services/project.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { Observable } from 'rxjs';
+import { Category } from 'src/app/model';
 
 @Component({
   selector: 'app-leverage-point',
@@ -15,17 +17,20 @@ export class LeveragePointComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    public navbarService: NavbarService
+    public navbarService: NavbarService,
+    private categoryService: CategoryService,
+
   ) { 
     navbarService.onProjectActivityPage = true;
+    this.leveragePoint$ = categoryService.getCategory(ids.leveragePoint);
   }
-  leveragePoint = ids.leveragePoint;
+  leveragePoint$: Observable<Category>;
 
   ngOnInit(): void {
   }
 
   nextActivity() {
     // Go to next activity in project
-    this.projectService.updateProjectStage(routes.initialProblem);
+    this.projectService.updateProjectStage(routes.initialProblemActivity);
   }
 }

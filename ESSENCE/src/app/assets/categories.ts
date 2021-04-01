@@ -9,10 +9,25 @@ export class Categories {
         this.fillOutCategoryView();
     }
 
+    isCategory(name) {
+        var obj = this.connectedCategories.get(name);
+        if(obj) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     areConnected(otherCategory: string, thisCategory: string) {
         let connectedCategories = this.connectedCategories.get(otherCategory);
+        if(connectedCategories) {
         let inList = connectedCategories.includes(thisCategory);
         return inList;
+        }
+        else {
+            // If the category is not in the connected categories list, there is no reason to examine if it is connected
+            return true;
+        }
     }
     fillOutConnectedCategories() {
         this.connectedCategories = new Map<string, string[]>();

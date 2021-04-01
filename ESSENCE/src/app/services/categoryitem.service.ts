@@ -7,6 +7,9 @@ import * as ids from './../assets/vars';
 import { ItemConnection } from '../model/itemConnection';
 import { Project } from '../model/project';
 import { CategoryItem, Status } from '../model';
+import { ChosenFeature } from '../model/chosenFeature';
+import { Criteria } from '../model/criteria';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -103,5 +106,27 @@ export class CategoryitemService {
       else {
         this.itemRefrence(categoryItem.id, category).update({status: categoryItem.status});
       }
+    }
+    getFeatures(){
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<ChosenFeature>(ids.feature).snapshotChanges().pipe(map(
+        features => {
+          return features.map(feature => {
+            var element = {id: feature.payload.doc['id'], ...feature.payload.doc.data()};
+            var feat = new ChosenFeature(element.id, element.text);
+            feat.updateFeatureValue(element);
+            return feat;
+          })
+        }));
+    }
+    // Return criteria for feature
+    getCriterias(feature: string) {
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(feature).collection<CategoryItem>(ids.criteriaCollection);
+    }
+    updateCriteriaText(feature: string, criteria: Criteria) {
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(feature).collection(ids.criteriaCollection).doc(criteria.id).set(criteria);
+    }
+
+    toogleFeatureActivity(chosenFeature: ChosenFeature){
+      this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(chosenFeature.id).update({chosen: chosenFeature.chosen});
     }
 }

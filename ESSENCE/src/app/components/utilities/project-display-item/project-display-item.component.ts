@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from 'src/app/model/project';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProjectService } from 'src/app/services/project.service';
 import * as routes from '../../../assets/routes';
@@ -19,7 +19,7 @@ export class ProjectDisplayItemComponent implements OnInit {
   @Input() diagramID; 
   constructor(
     private modalService: NgbModal,
-    public authService: AuthServiceService, 
+    public authService: AuthService, 
     public categoryService: CategoryService,
     private projectService: ProjectService,
     public router: Router

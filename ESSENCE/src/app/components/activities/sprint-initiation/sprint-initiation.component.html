@@ -1,0 +1,24 @@
+<div class="contentContainer">
+    <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
+    <div class="contentRow">
+        <!--Display the features for this project-->
+        <div class="features product">
+            <h1>Features</h1>
+            <div *ngFor="let feature of features" class="list">
+                <button [ngClass]="feature.chosen" (click)="toogleActivity(feature)" class="item">{{feature.text}}</button>
+            </div>
+        </div>
+        <div *ngFor="let feature of features">
+            <div *ngIf="feature.chosen === 'true'">
+                <app-category-box *ngIf="(feature$ | async) as Category" [category]="Category" [criteria]="true" [parentFeature]="feature"></app-category-box>
+            </div>
+        </div>
+    </div>
+    <!--You should only be able to move on when you have chosen one or more features and defined a number of criteria for each feature-->
+    <div class="example-button-container">
+        <button (click)="nextActivity()" mat-fab class="finish beginButton">
+          <mat-icon class="icon">done</mat-icon>
+        </button>
+
+    </div>
+</div>

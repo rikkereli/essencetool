@@ -1,31 +1,7 @@
-<div class="contentContainer diagram">
-    <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
-    <div class="categoryRow">
-        <app-category-box class="categoryBox" [appAutoGrow]="problematic" [category]="problematic" [singleItemCategory]="true"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="leverage" [category]="leverage"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="resolution" [category]="resolution" [singleItemCategory]="true"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="rationale" [category]="rationale"></app-category-box>
-    </div>
-    <div class="categoryRow">
-        <app-category-box class="categoryBox" [appAutoGrow]="element" [category]="element"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="architecture" [category]="architecture"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="qualification" [singleItemCategory]="true" [category]="qualification"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="strategy" [category]="strategy"></app-category-box>
+<app-category-overview></app-category-overview>
+<div class="example-button-container">
+    <button (click)="nextActivity()" mat-fab class="finish beginButton">
+      <mat-icon class="icon">done</mat-icon>
+    </button>
 
-    </div>
-    <div class="categoryRow">
-        <app-category-box class="categoryBox" [appAutoGrow]="scenario" [category]="scenario"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="feature" [category]="feature"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="valueproposition" [category]="valueproposition"></app-category-box>
-        <app-category-box class="categoryBox" [appAutoGrow]="tactic" [category]="tactic"></app-category-box>
-
-    </div>
-
-    <div class="categoryRow">
-        <div class="example-button-container">
-            <button (click)="finishReview()" mat-fab class="beginButton finish">
-          <mat-icon class="icon">done</mat-icon>
-        </button>
-        </div>
-    </div>
 </div>

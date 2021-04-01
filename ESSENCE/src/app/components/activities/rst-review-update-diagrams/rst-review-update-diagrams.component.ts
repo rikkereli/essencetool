@@ -17,8 +17,8 @@ export class RstReviewUpdateDiagramsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  finishReview() {
-    this.projectService.updateProjectStage(routes.RSTReviewActivity);
+  nextActivity() {
+    this.projectService.updateProjectStage(routes.sprintInitiationActivity);
   }
   leverage = ids.leverage;
   challenge = ids.challenge;

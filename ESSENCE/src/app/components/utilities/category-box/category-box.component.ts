@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup, FormBuilder} from '@angular/forms';
 import { Observable } from 'rxjs';
-import {AngularFirestore } from '@angular/fire/firestore';
+import {AngularFirestore, DocumentChangeAction, DocumentData } from '@angular/fire/firestore';
 import { CategoryService } from '../../../services/category.service';
 import { Category, CategoryItem, Status } from '../../../model';
 import { ActivatedRoute } from '@angular/router';
 import { Categories } from '../../../assets/categories';
 import { CategoryitemService } from 'src/app/services/categoryitem.service';
+import { ChosenFeature } from 'src/app/model/chosenFeature';
+import { CategoryBoxService } from 'src/app/services/category-box.service';
+import { Item } from 'src/app/model/item';
 
 
 
@@ -18,45 +21,54 @@ export interface InformationField {
 @Component({
   selector: 'app-category-box',
   templateUrl: './category-box.component.html',
-  styleUrls: ['./category-box.component.scss']
+  styleUrls: ['./category-box.component.scss'], 
+  providers: [CategoryBoxService]
 })
 export class CategoryBoxComponent implements OnInit {
   // Enter if this is a category with only a single category item. 
   // Is relevant as it might be confusing to have the option of adding several items when only one is appropriate 
   @Input() singleItemCategory: Boolean = false;
-  @Input() category: string;
-
+  @Input() criteria: Boolean = false;
+  @Input() parentFeature: ChosenFeature;
+  @Input() category: Category;
   
   categoryFormGroup: FormGroup;
   itemsFormGroup: FormGroup;
 
-  category$: Observable<Category>;
+  parent;
   categoryView$: Observable<InformationField>;
   title$: Observable<any[]> = new Observable;
 
   categoryIDS: CategoryItem[] = [];
   bottomBoxAdded: Boolean = false;
-  view: string;
   // FormBuilder is not necessary, but adds syntactic sugar
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService, 
     private categoryItemService: CategoryitemService,
     private firestore: AngularFirestore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public categoryBoxService: CategoryBoxService
     ) {}
 
   private sub:any;
   ngOnInit(): void {
-    // Saved viewcolor locally in order to get faster response
-    this.view = new Categories().categoryView.get(this.category);
-  
-    this.category$ = this.categoryService.getCategory(this.category);      
+    if(this.criteria) {
+      this.categoryBoxService.setReference(this.parentFeature);
+      this.parent = this.parentFeature.id;
+    }
+    else {
+      this.categoryBoxService.setReference(this.category);
+      this.parent = this.category.id;
+    }
     this.itemsFormGroup = this.fb.group({});
     this.categoryFormGroup = this.fb.group({categoryItems: this.fb.array([])});
-      
-    // Get project ID from router parameters
-    this.categoryService.getCategoryItems(this.category).snapshotChanges().subscribe(changes => {
+    
+    this.categoryBoxService.getItems().subscribe(changes => {this.dataRecievedFromFirestore(changes)})
+  }
+
+  dataRecievedFromFirestore(changes: DocumentData[]) {
+
       // All items that have been touched
       var newList: String[] = []
       // Go through all items in the list and update accordingly
@@ -103,8 +115,9 @@ export class CategoryBoxComponent implements OnInit {
     if(!this.bottomBoxAdded) {
       this.addBottomBox();
       this.bottomBoxAdded = true;
-    }})
+    }
   }
+
   deleteLocal(id) {
     var index = this.categoryIDS.findIndex(e => e.id == id);
     this.categoryIDS.splice(index, 1);
@@ -125,7 +138,6 @@ export class CategoryBoxComponent implements OnInit {
   addEmptyBox(val: any) {
     // Find current value and see if it is empty. If user clicks on an empty field, add a new one.
     var currentValue = val.target.value;
-    var isTextarea = val.target.className.includes("textInput");
     if(currentValue == "") {
       this.addBottomBox();
     }
@@ -150,13 +162,13 @@ export class CategoryBoxComponent implements OnInit {
     // Save orderNr from category item 
     var orderNr = categoryItem.orderNr;
     // Delete item from firestore
-    this.categoryItemService.deleteItem(categoryItem, this.category);
+    this.categoryBoxService.deleteItem(categoryItem);
     // Go through all other items in category, move order nr by one.
     this.categoryIDS.forEach(element => {
       if(element.orderNr > orderNr && !element.localOnly) {
         // Decrease the order number by one
         element.orderNr = element.orderNr-1;
-        this.categoryItemService.updateItemOrderNr(element, this.category);
+        this.categoryBoxService.updateItemOrderNr(element);
       }
     });
   }
@@ -166,6 +178,13 @@ export class CategoryBoxComponent implements OnInit {
   // There should always be an empty item in the bottom 
   // When filled out, it is added to the list
   
+  updateItemText(item) {
+    this.categoryBoxService.updateItemText(item);
+  }
+
+  toogleItemStatus(item) {
+    this.categoryBoxService.updateItemStatus(item);
+  }
 
   get categoryItems(){
     return this.categoryFormGroup.get("categoryItems") as FormArray;

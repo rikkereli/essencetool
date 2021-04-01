@@ -53,7 +53,7 @@ export class ChallengeDefinitionComponent implements OnInit {
   paradigm = ids.paradigm;
   nextActivity() {
     // Go to next activity in project
-    this.projectService.updateProjectStage(routes.ecologyObject);
+    this.projectService.updateProjectStage(routes.ecologyObjectActivity);
   }
   updateChallenge(event) {
     this.categoryService.updateChallenge(event.target.value)

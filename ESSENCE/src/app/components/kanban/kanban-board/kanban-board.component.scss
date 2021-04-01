@@ -1,0 +1,98 @@
+h1 {
+    color: white;
+}
+
+.contain {
+    height: 100%;
+    width: 100%;
+}
+
+.trelloWindow {
+    height: 600px;
+}
+
+.titlebar {
+    display: flex;
+    flex-direction: row;
+}
+
+.finish {
+    margin-left: 20px;
+}
+
+html,
+body {
+    height: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.container-wrapper {
+    display: flex;
+    height: 400px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+mat-toolbar {
+    margin-bottom: 20px;
+}
+
+mat-toolbar>span {
+    margin-left: 10px;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.container-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms;
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+:host {
+    display: block;
+}
+
+.item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.container {
+    background-color: rgb(143, 164, 223);
+    height: inherit;
+    width: 100%;
+    margin: 0 25px 25px 0;
+    overflow: auto;
+    flex: 1;
+}
+
+.list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    border-radius: 4px;
+}
+
+app-new-task {
+    margin-bottom: 30px;
+}
+
+.empty-label {
+    font-size: 2em;
+    padding-top: 10px;
+    text-align: center;
+    opacity: 0.2;
+}

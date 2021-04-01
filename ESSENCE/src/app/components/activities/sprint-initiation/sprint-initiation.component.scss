@@ -1,0 +1,41 @@
+h1 {
+    color: white;
+}
+
+.features {
+    width: 150px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    border-color: white;
+    border-style: solid;
+    border: 5px;
+    border-radius: 10px;
+}
+
+.contentRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.false {
+    opacity: 0.3;
+}
+
+.true {
+    opacity: 1;
+}
+
+.item {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.list {
+    overflow: auto;
+}
+
+.title {
+    font-weight: bold;
+}

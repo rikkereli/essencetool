@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import * as jspdf from 'jspdf';
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   title = "ESSENCE";
   constructor(
-    public authService: AuthServiceService, 
+    public authService: AuthService, 
     public categoryService: CategoryService,
     private modalService: NgbModal,
     public projectService: ProjectService,

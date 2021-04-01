@@ -23,6 +23,11 @@ export class CategoryService {
   getCategoryItems(category: string) {
     return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<CategoryItem>(category, ref => ref.orderBy("orderNr"));
   }
+
+  // Returns reference to the category of chosen diagram
+  getItemsFromCategory(category: string) {
+    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<CategoryItem>(category, ref => ref.orderBy("orderNr")).valueChanges();
+  }
   // Retrieve an overview of diagrams for this user
   getUserDiagrams(){
     // Get current user

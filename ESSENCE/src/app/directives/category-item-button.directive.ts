@@ -23,7 +23,7 @@ export class CategoryItemButtonDirective implements OnInit {
         this.itemConnections = tempItems;
       }
     );
-    
+    if(this.categories.isCategory(this.appCategoryItemButton.parentCategory)) {
     this.categoryItemService.inFocusObject.subscribe(
       (currentFocus) =>
       {
@@ -76,6 +76,7 @@ export class CategoryItemButtonDirective implements OnInit {
 
       }
     });
+  }
   }
   // Should reset on mouse leave
   shouldReset = false;

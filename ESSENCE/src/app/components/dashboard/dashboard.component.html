@@ -2,7 +2,7 @@
     <div>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">
-                Filling
+                {{navbarService.currentPageDetails.title}}
             </h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
   
@@ -54,7 +54,6 @@
             <li class="nav-item" title="Getting lost? Get instructions here!">
                 <a (click)="getHelp(help)" class="nav-link waves-light" mdbWavesEffect>
                     <mat-icon aria-hidden="false">help</mat-icon>
-
                 </a>
             </li>
             <li class="nav-item" title="Open diagram overview" *ngIf="navbarService.onProjectActivityPage" (click)="openDiagram()">
@@ -94,5 +93,6 @@
     <!-- Collapsible content -->
 
 </mdb-navbar>
-
-<router-outlet></router-outlet>
+<div class="outlet">
+    <router-outlet></router-outlet>
+</div>

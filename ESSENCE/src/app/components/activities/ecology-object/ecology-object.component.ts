@@ -5,6 +5,8 @@ import * as ids from '../../../assets/vars';
 import * as routes from '../../../assets/routes';
 import { ProjectService } from 'src/app/services/project.service';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { Observable } from 'rxjs';
+import { Category } from 'src/app/model';
 
 @Component({
   selector: 'app-ecology-object',
@@ -15,12 +17,14 @@ export class EcologyObjectComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    public navbarService: NavbarService
+    public navbarService: NavbarService,
+    private categoryService: CategoryService,
 
   ) { 
     navbarService.onProjectActivityPage = true;
+    this.ecologyObject$ = categoryService.getCategory(ids.ecologyObject);
   }
-  ecologyObject = ids.ecologyObject;
+  ecologyObject$: Observable<Category>;
 
   ngOnInit(): void {
   }
@@ -28,6 +32,6 @@ export class EcologyObjectComponent implements OnInit {
   description = "Generate potential ecology objects"; 
   nextActivity() {
     // Go to next activity in project
-    this.projectService.updateProjectStage(routes.leveragePoint);
+    this.projectService.updateProjectStage(routes.leveragePointActivity);
   }
 }

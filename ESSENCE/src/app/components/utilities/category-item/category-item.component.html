@@ -3,7 +3,7 @@
 <div class="input-group" id="inputGroup">
     <textarea [appCategoryItem]="categoryInfo" (input)="updateItemText($event)" matInput (focus)="addBox($event)" (focusout)="deleteBox($event)" class="textInput" value={{text}} [ngClass]="categoryItem.getStatus()"></textarea>
     <div class="form-check form-switch">
-        <input [appToogleActivity]="parentCategory" class="form-check-input" [ngClass]="categoryItem.getStatus()" checked type="checkbox" (change)="toogleActive()">
+        <input *ngIf="parentCategory" [appToogleActivity]="parentCategory" class="form-check-input" [ngClass]="categoryItem.getStatus()" checked type="checkbox" (change)="toogleActive()">
     </div>
     <button [appCategoryItemButton]="categoryInfo" [ngbTooltip]="connectTooltip" class="connectButton ">C</button>
 </div>

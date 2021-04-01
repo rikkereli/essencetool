@@ -24,6 +24,8 @@ import { ProspectRepesentationExpansionComponent } from './components/activities
 import { RstReviewCommentsComponent } from './components/activities/rst-review-comments/rst-review-comments.component';
 import { RstReviewCriteriaComponent } from './components/activities/rst-review-criteria/rst-review-criteria.component';
 import { RstReviewUpdateDiagramsComponent } from './components/activities/rst-review-update-diagrams/rst-review-update-diagrams.component';
+import { SprintInitiationComponent } from './components/activities/sprint-initiation/sprint-initiation.component';
+import { SprintWorkComponent } from './components/activities/sprint-work/sprint-work.component';
 
 const routes: Routes = [
   //{ path: '**', redirectTo:'/dashboard'},
@@ -37,10 +39,10 @@ const routes: Routes = [
     { path: 'diagramTool/:diagramId', component: CategoryOverviewComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'diagramOverview', component: CategoryOverviewComponent},
-    { path: routeNames.challengeDetected, component: ChallengeDefinitionComponent},
-    { path: routeNames.ecologyObject, component: EcologyObjectComponent},
-    { path: routeNames.leveragePoint, component: LeveragePointComponent},
-    { path: routeNames.initialProblem, component: InitialProblemComponent},
+    { path: routeNames.challengeDetectedActivity, component: ChallengeDefinitionComponent},
+    { path: routeNames.ecologyObjectActivity, component: EcologyObjectComponent},
+    { path: routeNames.leveragePointActivity, component: LeveragePointComponent},
+    { path: routeNames.initialProblemActivity, component: InitialProblemComponent},
     { path: routeNames.axixAlignmentActivity, component: AxisAlignmentComponent},
     { path: routeNames.RSTReviewActivity, component: RstReviewComponent},
     { path: routeNames.prospectRepresentationActivity, component: ProspectRepesentationGenerationComponent},
@@ -48,6 +50,8 @@ const routes: Routes = [
     { path: routeNames.RSTReviewGetCommentsActivity, component: RstReviewCommentsComponent},
     { path: routeNames.RSTReviewGenerateCriteriaActivity, component: RstReviewCriteriaComponent},
     { path: routeNames.RSTReviewupdateDiagramActivity, component: RstReviewUpdateDiagramsComponent},
+    { path: routeNames.sprintInitiationActivity, component: SprintInitiationComponent},
+    { path: routeNames.sprintWorkActivity, component: SprintWorkComponent},
   ]}
 ];
 

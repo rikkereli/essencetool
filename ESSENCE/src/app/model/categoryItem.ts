@@ -1,9 +1,10 @@
+import { Item } from "./item";
 
 export enum Status {
-    active, inactive
+     inactive = 0, active = 1
 }
 
-export class CategoryItem  {
+export class CategoryItem implements Item  {
 
     getStatus() {
         if(this.status === Status.active) {
@@ -20,6 +21,7 @@ export class CategoryItem  {
         this.localOnly = localOnly;
         this.subcategory = subCategory;
         this.status = status;
+        this.statusString = this.getStatus();
     }
     text: string = ''; 
     id: string;
@@ -29,7 +31,16 @@ export class CategoryItem  {
     status: Status = Status.active;
     // If it is related to a subcateogry
     subcategory: string;
-
+    toogleStatus() {
+        if(this.status === Status.active) {
+            this.status = Status.inactive;
+        }
+        else {
+            this.status = Status.active;
+        }
+        this.statusString = this.getStatus();
+    }
+    statusString = "active";
     updateItemValue(newValues) {
         if(newValues.orderNr) {
             this.orderNr = newValues.orderNr;

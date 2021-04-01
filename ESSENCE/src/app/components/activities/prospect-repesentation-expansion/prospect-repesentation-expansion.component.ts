@@ -22,7 +22,7 @@ export class ProspectRepesentationExpansionComponent implements OnInit {
 
   nextActivity() {
     // Go to next activity in project
-    this.projectService.updateProjectStage(routes.RSTReviewActivity);
+    this.projectService.updateProjectStage(routes.sprintInitiationActivity);
   }
 
 }
