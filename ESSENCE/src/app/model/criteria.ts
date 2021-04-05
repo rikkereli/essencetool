@@ -1,10 +1,9 @@
-import { Status } from "./categoryItem";
 import { Item } from "./item";
 
-export class Criteria implements Item{
-    text: string;
-    status: Status;
-    id: string;
-    orderNr: number;
-    localOnly: boolean;
+export class Criteria extends Item{
+    getFirestoreRep() {
+        return {status: this.status, text: this.text, orderNr: this.orderNr}
+    }
+    createNew(orderNr) { return new Criteria(orderNr)}
+    
 }

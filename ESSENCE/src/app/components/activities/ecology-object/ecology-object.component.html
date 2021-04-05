@@ -1,8 +1,17 @@
 <div class="contentContainer">
     <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
-    <div class="categoryRow">
-        <app-category-box *ngIf="ecologyObject$ | async as ecologyObject" class="categoryBox" [category]="ecologyObject"></app-category-box>
-    </div>
-    <app-next-activity (click)="nextActivity()"></app-next-activity>
 
+    <div class="table-top">
+        <div class="name">Ecology idea</div>
+        <div class="value" title="Value between 0 and 5 reprecenting the strength of the idea">Strength</div>
+        <div class="value" title="Value between 0 and 5 reprecenting the weaknesses of the idea">Weakness</div>
+        <div class="value" title="Value between 0 and 5 reprecenting the threat of the idea">Threat</div>
+        <div class="value" title="Value between 0 and 5 reprecenting the oppotunities of the idea">Oppotunity</div>
+        <div class="value" title="The total value representing the utility of the idea">Total</div>
+        <div class="value" title="Select the ecology object for the project">Select</div>
+    </div>
+    <div *ngFor="let ecologyObject of categoryBoxService.categoryIDS">
+        <app-swotitem (valueChangedEvent)="categoryBoxService.updateItem($event)" [ecologyItem]="ecologyObject"></app-swotitem>
+    </div>
+    <app-next-activity></app-next-activity>
 </div>

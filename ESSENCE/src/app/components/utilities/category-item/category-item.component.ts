@@ -27,8 +27,7 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
 
   @Output() focusOnEmptyInputEvent = new EventEmitter<string>();
   @Output() focusOutOfEmptyInputEvent = new EventEmitter<CategoryItem>();
-  @Output() textChangedEvent = new EventEmitter<CategoryItem>();
-  @Output() itemStatusChangedEvent = new EventEmitter<CategoryItem>();
+  @Output() itemChangedEvent = new EventEmitter<CategoryItem>();
 
   connectTooltip = "Connect highlighted item to this item";
   // If we click on an empty box, send event to parent
@@ -74,7 +73,7 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
   updateItemText(val: any) {
     this.categoryItem.text = val.target.value;
 
-    this.textChangedEvent.next(this.categoryItem);
+    this.itemChangedEvent.next(this.categoryItem);
   }
 
   toogleActive() {
@@ -84,6 +83,6 @@ export class CategoryItemComponent implements ControlValueAccessor, OnInit {
     else {
       this.categoryItem.status = Status.active;
     }
-    this.itemStatusChangedEvent.next(this.categoryItem);
+    this.itemChangedEvent.next(this.categoryItem);
   }
 }

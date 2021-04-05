@@ -130,6 +130,8 @@ export class ProjectService {
     var project = this.getCurrentProject();
     this.firestore.collection(ids.diagramsCollection).doc(project).update({projectStage: stage});
   }
+
+
   getProject(diagramId: string) {
     return this.firestore.collection(ids.diagramsCollection).doc<Project>(diagramId);
   }

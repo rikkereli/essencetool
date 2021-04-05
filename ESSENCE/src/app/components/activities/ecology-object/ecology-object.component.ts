@@ -6,7 +6,11 @@ import * as routes from '../../../assets/routes';
 import { ProjectService } from 'src/app/services/project.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { Observable } from 'rxjs';
-import { Category } from 'src/app/model';
+import { Category, CategoryItem, Status } from 'src/app/model';
+import { CategoryitemService } from 'src/app/services/categoryitem.service';
+import { CategoryBoxService } from 'src/app/services/category-box.service';
+import { FirestoreReferencesService } from 'src/app/services/firestore-references.service';
+import { Swotitem } from 'src/app/model/swotItem';
 
 @Component({
   selector: 'app-ecology-object',
@@ -19,15 +23,23 @@ export class EcologyObjectComponent implements OnInit {
     private projectService: ProjectService,
     public navbarService: NavbarService,
     private categoryService: CategoryService,
+    public categoryItemService: CategoryitemService,
+    public categoryBoxService: CategoryBoxService<Swotitem>,
+    private firestoreReferenceService: FirestoreReferencesService
 
   ) { 
+    this.categoryBoxService.type = new Swotitem(0);
     navbarService.onProjectActivityPage = true;
-    this.ecologyObject$ = categoryService.getCategory(ids.ecologyObject);
+    this.ecologyObjectCategory$ = this.categoryService.getCategory(ids.ecologyObject);
+    this.ecologyObjectCategory$.subscribe(category => {
+      this.categoryBoxService.categoryReference = this.firestoreReferenceService.getEcologyItemCollection();
+      this.categoryBoxService.getItems();
+    })
   }
-  ecologyObject$: Observable<Category>;
+  ecologyObjectCategory$: Observable<Category>;
 
-  ngOnInit(): void {
-  }
+  ecologyObjects$: Observable<CategoryItem[]>;
+  ngOnInit(): void {}
 
   description = "Generate potential ecology objects"; 
   nextActivity() {

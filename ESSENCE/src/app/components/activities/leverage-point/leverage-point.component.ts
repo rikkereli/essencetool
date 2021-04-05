@@ -7,6 +7,10 @@ import { ProjectService } from 'src/app/services/project.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model';
+import { CategoryBoxService } from 'src/app/services/category-box.service';
+import { CategoryitemService } from 'src/app/services/categoryitem.service';
+import { FirestoreReferencesService } from 'src/app/services/firestore-references.service';
+import { PcrtItem } from 'src/app/model/pcrtItem';
 
 @Component({
   selector: 'app-leverage-point',
@@ -19,15 +23,22 @@ export class LeveragePointComponent implements OnInit {
     private projectService: ProjectService,
     public navbarService: NavbarService,
     private categoryService: CategoryService,
+    public categoryItemService: CategoryitemService,
+    public categoryBoxService: CategoryBoxService<PcrtItem>,
+    private firestoreReferenceService: FirestoreReferencesService
 
   ) { 
+    this.categoryBoxService.type = new PcrtItem(0);
     navbarService.onProjectActivityPage = true;
-    this.leveragePoint$ = categoryService.getCategory(ids.leveragePoint);
+    this.ecologyObjectCategory$ = this.categoryService.getCategory(ids.ecologyObject);
+    this.categoryBoxService.categoryReference = this.firestoreReferenceService.getLeveragePointCollection();
+    this.categoryBoxService.getItems();
   }
-  leveragePoint$: Observable<Category>;
+  ecologyObjectCategory$: Observable<Category>;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+  description = "Generate potential ecology objects"; 
 
   nextActivity() {
     // Go to next activity in project

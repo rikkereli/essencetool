@@ -1,9 +1,5 @@
 <div class="contentContainer">
     <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
 
-    <div class="example-button-container">
-        <button (click)="startReview()" mat-fab class="process beginButton" aria-label="Example icon button with a plus one icon">
-          <mat-icon class="icon">not_started</mat-icon>
-        </button>
-    </div>
+    <app-next-activity></app-next-activity>
 </div>

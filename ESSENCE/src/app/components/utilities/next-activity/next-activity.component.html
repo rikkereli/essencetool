@@ -1,4 +1,11 @@
-<a class="nav-link waves-light" mdbWavesEffect>
-    <mat-icon aria-hidden="false">arrow_forward</mat-icon>
-    <h5>Next</h5>
-</a>
+<div class="buttons">
+    <a class="nav-link waves-light" (click)="navbarService.previousStage()" *ngIf="navbarService.previousExist" mdbWavesEffect>
+        <mat-icon aria-hidden="false">arrow_backward</mat-icon>
+        <h5>Previous</h5>
+    </a>
+
+    <a class="nav-link waves-light" (click)="navbarService.nextStage()" mdbWavesEffect>
+        <mat-icon aria-hidden="false">arrow_forward</mat-icon>
+        <h5>Next</h5>
+    </a>
+</div>

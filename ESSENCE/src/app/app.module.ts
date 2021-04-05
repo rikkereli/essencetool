@@ -69,7 +69,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TaskDialogComponent } from './components/kanban/task-dialog/task-dialog.component';
 import { KanbanBoardComponent } from './components/kanban/kanban-board/kanban-board.component';
 import { KanbanService } from './services/kanban.service';
-import { SwotitemComponent } from './components/utlities/swotitem/swotitem.component';
+import { SwotitemComponent } from './components/utilities/swotitem/swotitem.component';
+import { PcrtitemComponent } from './components/utilities/pcrtitem/pcrtitem.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { SwotitemComponent } from './components/utlities/swotitem/swotitem.compo
     TaskComponent,
     TaskDialogComponent,
     KanbanBoardComponent,
-    SwotitemComponent
+    SwotitemComponent,
+    PcrtitemComponent
   ],
   imports: [
     BrowserModule,

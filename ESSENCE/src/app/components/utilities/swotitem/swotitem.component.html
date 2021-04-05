@@ -1,1 +1,9 @@
-<p>swotitem works!</p>
+<div class="swotitem">
+    <input matInput class="name" (input)="updateItemText($event)" value={{ecologyItem.text}}>
+    <input matInput class="value" (input)="updateStrength($event)" value={{ecologyItem.strength}}>
+    <input matInput class="value" (input)="updateWeaknesses($event)" value={{ecologyItem.weaknesses}}>
+    <input matInput class="value" (input)="updateOppotunities($event)" value={{ecologyItem.oppotunities}}>
+    <input matInput class="value" (input)="updateThreats($event)" value={{ecologyItem.threats}}>
+    <div class="value">{{ecologyItem.total}}</div>
+    <button mat-button class="value" (click)="toogleSelect()" [ngClass]="ecologyItem.getStatus()"></button>
+</div>

@@ -53,6 +53,7 @@ export class NavbarService {
           this.onProjects = false;
           // If we are not in any project, we should stop listening to subscriptions
           this.currentProject = this.firestore.collection("diagrams").doc<Project>(project).valueChanges().subscribe(details => {
+            this.projectStage = details.projectStage;
             // If project stage changes, navigate to page
             router.navigate(['/dashboard/'+details.projectStage]);
             this.currentPage.next(details.projectStage);
@@ -70,6 +71,35 @@ export class NavbarService {
   }
   currentPageDetails: Page = new Page();
   currentTitle: string = "";
+  projectStage: string;
+  
+  stages: string[] = ["challengeDetected", "ecologyObject", "leveragePoint", "initialProblem", "axisAlignment","prospectRepresentation", "prospectRepresentationExpansion", "sprintInitiation", "sprintWork", "RSTReview","GetComments", "GenerateCriteria", "UpdateDiagram"]
+ 
+  previousStage(){
+    if(!(this.projectStage === "challengeDetected")){
+    var index = this.stages.indexOf(this.projectStage);
+    var previousStage = this.stages[index-1];
+    this.projectService.updateProjectStage(previousStage);
+    }
+  }
+  nextStage() {
+    if(this.projectStage === "UpdateDiagram") {
+      var nextStage = "sprintInitiation";
+    }
+    else {
+      var index = this.stages.indexOf(this.projectStage);
+      var nextStage = this.stages[index+1];
+    }
+    this.projectService.updateProjectStage(nextStage);
+  }
+  get previousExist() {
+    if(this.projectStage === "challengeDetected"){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
   getHelpFromCurrentSite() {
   }
     // Gets the current project ID from localstorage

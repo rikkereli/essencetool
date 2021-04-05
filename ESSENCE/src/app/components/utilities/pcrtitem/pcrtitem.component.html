@@ -1,0 +1,9 @@
+<div class="swotitem">
+    <input matInput class="name" (input)="updateItemText($event)" value={{leverageItem.text}}>
+    <input matInput class="value" (input)="updatePower($event)" value={{leverageItem.power}}>
+    <input matInput class="value" (input)="updateCost($event)" value={{leverageItem.cost}}>
+    <input matInput class="value" (input)="updateRisk($event)" value={{leverageItem.risk}}>
+    <input matInput class="value" (input)="updateTime($event)" value={{leverageItem.time}}>
+    <div class="value">{{leverageItem.total}}</div>
+    <button mat-button class="value" (click)="toogleSelect()" [ngClass]="leverageItem.getStatus()"></button>
+</div>

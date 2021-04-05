@@ -5,9 +5,6 @@
         <app-category-box *ngIf="strategy$ | async as strategy" class="categoryBox" [appAutoGrow]="strategy" [category]="strategy"></app-category-box>
         <app-category-box *ngIf="tactic$ | async as tactic" class="categoryBox" [appAutoGrow]="tactic" [category]="tactic"></app-category-box>
     </div>
-    <div class="example-button-container">
-        <button (click)="updateCategories()" mat-fab class="finish beginButton">
-      <mat-icon class="icon">done</mat-icon>
-    </button>
-    </div>
+    <app-next-activity></app-next-activity>
+
 </div>

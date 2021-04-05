@@ -3,9 +3,5 @@
     <div class="categoryRow">
         <app-category-box *ngIf="comments$ | async as comments" class="categoryBox" [category]="comments"></app-category-box>
     </div>
-    <div class="example-button-container">
-        <button (click)="generateCriteria()" mat-fab class="finish beginButton">
-          <mat-icon class="icon">done</mat-icon>
-        </button>
-    </div>
+    <app-next-activity></app-next-activity>
 </div>

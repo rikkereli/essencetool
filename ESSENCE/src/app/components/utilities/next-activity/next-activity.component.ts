@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-next-activity',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class NextActivityComponent implements OnInit {
 
   disabled: boolean = false;
-  constructor() { }
+  constructor(public navbarService: NavbarService) { }
 
   ngOnInit(): void {
   }
