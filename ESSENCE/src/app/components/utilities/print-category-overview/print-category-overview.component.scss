@@ -1,0 +1,17 @@
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+}
+
+app-print-category {
+    width: 100%;
+    flex-grow: 1;
+}
+
+.long {
+    width: 240px;
+}
+
+.short {
+    width: 150px;
+}

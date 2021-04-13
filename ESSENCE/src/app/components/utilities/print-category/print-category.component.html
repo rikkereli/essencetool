@@ -1,0 +1,19 @@
+<div class="card" *ngIf="categoryInfo" [ngClass]="categoryInfo.view">
+    <div class="card-header header">
+        <h3 class="title">{{categoryInfo.displayTitle}}</h3>
+    </div>
+    <div class="card-body body">
+        <div class="item" *ngFor="let item of items$ | async as items">
+            <div class="subCategory">
+                {{item.subcategory | titlecase}}
+            </div>
+            <div class="itemText" [ngClass]="item.getStatus()">
+                {{item.text}}
+            </div>
+        </div>
+    </div>
+
+</div>
+<div *ngIf="!categoryInfo">
+    Did not get info yet
+</div>

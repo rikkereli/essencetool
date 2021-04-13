@@ -71,6 +71,10 @@ import { KanbanBoardComponent } from './components/kanban/kanban-board/kanban-bo
 import { KanbanService } from './services/kanban.service';
 import { SwotitemComponent } from './components/utilities/swotitem/swotitem.component';
 import { PcrtitemComponent } from './components/utilities/pcrtitem/pcrtitem.component';
+import { ProspectGenerationComponent } from './components/activities/prospect-generation/prospect-generation.component';
+import { ProspectScenarioQuadrantComponent } from './components/utilities/prospect-scenario-quadrant/prospect-scenario-quadrant.component';
+import { PrintCategoryComponent } from './components/utilities/print-category/print-category.component';
+import { PrintCategoryOverviewComponent } from './components/utilities/print-category-overview/print-category-overview.component';
 
 
 @NgModule({
@@ -112,7 +116,11 @@ import { PcrtitemComponent } from './components/utilities/pcrtitem/pcrtitem.comp
     TaskDialogComponent,
     KanbanBoardComponent,
     SwotitemComponent,
-    PcrtitemComponent
+    PcrtitemComponent,
+    ProspectGenerationComponent,
+    ProspectScenarioQuadrantComponent,
+    PrintCategoryComponent,
+    PrintCategoryOverviewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,12 @@
-<div class="card containerCard">
-    <div class="categoryContainer" [ngClass]="view">
-        <div class="card-header" [ngClass]="view">
-            <h4 class="mb-0 titleText" [ngbTooltip]="tooltip"> {{title}}</h4>
-        </div>
-        <div class="card-body itemsBox flex-grow-1" [formGroup]=categoryBoxService.itemsFormGroup [ngClass]="view">
-            <div *ngFor="let item of categoryBoxService.categoryIDS">
-                <app-category-item *ngIf="parent" (itemChangedEvent)="categoryBoxService.updateItem($event)" (focusOnEmptyInputEvent)="categoryBoxService.addBottomBox()" (focusOutOfEmptyInputEvent)="categoryBoxService.removeEmptyItems($event)" [categoryItem]="item" [parentCategory]="parent"
-                    [formControlName]="item.id">
-                </app-category-item>
-            </div>
+<div class="card containerCard categoryContainer" [ngClass]="view">
+    <div class="card-header" [ngClass]="view">
+        <h4 class="mb-0 titleText" [ngbTooltip]="tooltip"> {{title}}</h4>
+    </div>
+    <div class="card-body itemsBox flex-grow-1" [formGroup]=categoryBoxService.itemsFormGroup [ngClass]="view">
+        <div *ngFor="let item of categoryBoxService.categoryIDS">
+            <app-category-item *ngIf="parent" (itemChangedEvent)="categoryBoxService.updateItem($event)" (focusOnEmptyInputEvent)="categoryBoxService.addBottomBox()" (focusOutOfEmptyInputEvent)="categoryBoxService.removeEmptyItems($event)" [categoryItem]="item" [parentCategory]="parent"
+                [formControlName]="item.id">
+            </app-category-item>
         </div>
     </div>
 </div>

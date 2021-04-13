@@ -8,6 +8,27 @@ h4 {
     color: white;
 }
 
+.selectedContainer {
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.text {
+    color: white;
+    padding-left: 20px;
+}
+
+li {
+    color: white;
+}
+
+.title {
+    margin: 10px;
+    color: white;
+}
+
 .modal-title {
     color: black;
 }

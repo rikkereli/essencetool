@@ -7,6 +7,7 @@ export const diagramsCollection = "diagrams";
 export const connectedDiagramsCollection = "connectedDocuments";
 export const chosenFeaturesCollection = "chosenFeatures";
 export const criteriaCollection = "criteria";
+export const prospectScenarioQuadrantCollection = "prospectScenarioQuadrant";
 
 export const backlogCollection = "backlog";
 export const inProgressCollection = "inProgress";

@@ -26,21 +26,37 @@ a>* {
 }
 
 .challengeBox {
-    background-color: $paradigm-view-color;
     border-color: $paradigm-view-color;
+    border-style: solid;
+    border-width: 5px;
+    background-color: transparent;
+    width: 400px;
+    height: 250px;
     padding-top: 20px;
-    border: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .challengeContent {
-    height: 100%;
-    width: 100%;
+    width: 300px;
+    background-color: transparent;
+    color: $paradigm-view-color;
+    border-color: transparent;
 }
 
 mat-icon {
     color: white;
     height: inherit;
-    width: inherit;
+    width: 50px;
+}
+
+.tutorial {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .helpButton {
@@ -60,7 +76,7 @@ mat-icon {
 }
 
 .challengeBody {
-    height: 200px;
+    height: 100px;
     width: 300px;
 }
 

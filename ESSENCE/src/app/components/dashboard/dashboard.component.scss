@@ -84,6 +84,11 @@ mat-toolbar>span {
     margin: 0 25px 25px 0;
 }
 
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .list {
     border: solid 1px #ccc;
     min-height: 60px;

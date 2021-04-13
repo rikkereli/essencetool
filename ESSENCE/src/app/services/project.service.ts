@@ -7,6 +7,8 @@ import { Status } from '../model';
 import { DiagramReference } from '../model/diagramReference';
 import { Project, ProjectStage } from '../model/project';
 import * as routes from '../assets/routes';
+import { FirestoreReferencesService } from './firestore-references.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class ProjectService {
   currentProject: BehaviorSubject<string> = new BehaviorSubject("projects");
   projectsData: any;
 
-  constructor(private firestore: AngularFirestore, public firestoreAuth: AngularFireAuth,) { 
+  constructor(private firestore: AngularFirestore, public firestoreAuth: AngularFireAuth, public firestoreReferenceService: FirestoreReferencesService) { 
         // Listen to changes in login status and update list of projects accordingly
         this.firestoreAuth.authState.subscribe(user => {
           // If login successful
@@ -131,7 +133,15 @@ export class ProjectService {
     this.firestore.collection(ids.diagramsCollection).doc(project).update({projectStage: stage});
   }
 
+  getSelectedEcologyObjects(){
+    return this.firestoreReferenceService.getEcologyObjectCollection().valueChanges().pipe(
+      map(obj => obj.filter(object => object.status === 1)));
+  }
 
+  getSelectedLeveragePoints(){
+    return this.firestoreReferenceService.getLeveragePointCollection().valueChanges().pipe(
+      map(obj => obj.filter(object => object.status === 1)));
+  }
   getProject(diagramId: string) {
     return this.firestore.collection(ids.diagramsCollection).doc<Project>(diagramId);
   }

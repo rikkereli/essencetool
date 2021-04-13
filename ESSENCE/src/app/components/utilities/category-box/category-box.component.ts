@@ -4,6 +4,7 @@ import { Category, CategoryItem, Item } from '../../../model';
 import { ChosenFeature } from 'src/app/model/chosenFeature';
 import { CategoryBoxService } from 'src/app/services/category-box.service';
 import { FirestoreReferencesService } from 'src/app/services/firestore-references.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 
 
@@ -32,13 +33,12 @@ export class CategoryBoxComponent implements OnInit {
   tooltip = "";
   parent;
   categoryView$: Observable<InformationField>;
-  title$: Observable<any[]> = new Observable;
-
 
   // FormBuilder is not necessary, but adds syntactic sugar
   constructor(
     public categoryBoxService: CategoryBoxService<CategoryItem>,
-    public firestoreReferenceService: FirestoreReferencesService
+    public firestoreReferenceService: FirestoreReferencesService,
+    public navbarService: NavbarService
     ) {
       categoryBoxService.type = new CategoryItem(0);
     }
@@ -49,6 +49,7 @@ export class CategoryBoxComponent implements OnInit {
       this.categoryBoxService.categoryReference = this.firestoreReferenceService.getCriteria(this.parentFeature.id);
       this.parent = this.parentFeature.id;
       this.view = "process";
+      this.title = this.parentFeature.text; 
     }
     else {
       this.categoryBoxService.categoryReference = this.firestoreReferenceService.getCategory(this.category.id);

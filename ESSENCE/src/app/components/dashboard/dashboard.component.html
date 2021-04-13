@@ -1,3 +1,10 @@
+<ng-template #configuration let-modal>
+    <div class="modal-header">
+        Header
+    </div>
+    <div class="modal-body" id="printPage">
+    </div>
+</ng-template>
 <ng-template #help let-modal>
     <div>
         <div class="modal-header">
@@ -51,6 +58,11 @@
                     Projects
                 </a>
             </li>
+            <li class="nav-item" title="See word list.">
+                <a (click)="openWordList()" class="nav-link waves-light" mdbWavesEffect>
+                    <mat-icon aria-hidden="false">book</mat-icon>
+                </a>
+            </li>
             <li class="nav-item" title="Getting lost? Get instructions here!">
                 <a (click)="getHelp(help)" class="nav-link waves-light" mdbWavesEffect>
                     <mat-icon aria-hidden="false">help</mat-icon>
@@ -63,7 +75,7 @@
                 </a>
             </li>
             <li class="nav-item" title="Print project status" *ngIf="navbarService.onProjectActivityPage">
-                <a (click)="exportAsPdf()" class="nav-link waves-light" mdbWavesEffect>
+                <a (click)="exportAsPdf(configuration)" class="nav-link waves-light" mdbWavesEffect>
                     <mat-icon aria-hidden="false">print</mat-icon>
 
                 </a>

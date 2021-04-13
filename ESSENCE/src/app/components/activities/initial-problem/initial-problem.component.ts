@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model';
+import { PcrtItem } from 'src/app/model/pcrtItem';
 import { ProjectStage } from 'src/app/model/project';
+import { Swotitem } from 'src/app/model/swotItem';
 import { CategoryService } from 'src/app/services/category.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -20,7 +22,7 @@ export class InitialProblemComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private categoryService: CategoryService,
-    private projectService: ProjectService,
+    public projectService: ProjectService,
     private formBuilder: FormBuilder,
     public navbarService: NavbarService
   ) { 
@@ -28,8 +30,14 @@ export class InitialProblemComponent implements OnInit {
       {problem: this.formBuilder.control('', [Validators.required, Validators.minLength(30)]),
        warrant: this.formBuilder.control('', [Validators.required, Validators.minLength(30)])})
     navbarService.onProjectActivityPage = true;
-  }
 
+    this.selectedEcologyObjects$ = this.projectService.getSelectedEcologyObjects();
+    this.selectedLeveragePoints$ = this.projectService.getSelectedLeveragePoints();
+  }
+  selectedEcologyObjects$: Observable<Swotitem[]>;
+  selectedLeveragePoints$: Observable<PcrtItem[]>;
+
+  challenge = "Loading challenge...";
   problemInfo$: Observable<Category>;
   warrantInfo$: Observable<Category>;
   ngOnInit(): void {
@@ -42,9 +50,11 @@ export class InitialProblemComponent implements OnInit {
       {
         this.formGroup.controls['problem'].setValue(problem[0].text,);
       });
+    this.categoryService.getSubCategory('challenge').subscribe(challenge => {
+      this.challenge = challenge[0].text;
+    }) 
     this.problemInfo$ = this.categoryService.getInformation(ids.problem).valueChanges();
     this.warrantInfo$ = this.categoryService.getInformation(ids.warrant).valueChanges();
-
   }
   minLengthErrorMessage = "The problem should be described with at least 30 characters" ;
   requiredErrorMessage = "You must describe the problem before continuing" ;

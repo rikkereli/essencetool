@@ -1,0 +1,14 @@
+<div class="representationBox" [ngClass]="selected" (click)="toogleSelected($event)">
+    <div class="line">
+        <label>Prototype</label><textarea rows="1" class="input" [(ngModel)]="prototype" (input)="updatePrototype()"></textarea>
+    </div>
+    <div class="line">
+        <label>Metaphor</label><textarea rows="1" class="input" [(ngModel)]="metaphor" (input)="updateMetaphor()"></textarea>
+    </div>
+    <div class="line">
+        <label>Proposition</label><textarea class="input" rows="2" [(ngModel)]="proposition" (input)="updateProposition()"></textarea>
+    </div>
+    <div class="line">
+        <label>Icon</label><textarea rows="1" class="input" [(ngModel)]="icon" (input)="updateIcon()"></textarea>
+    </div>
+</div>

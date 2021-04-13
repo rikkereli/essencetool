@@ -6,6 +6,7 @@ export abstract class Item {
     constructor(orderNr: number) {
         this.orderNr = orderNr;
     }
+    subcategory?: string;
 
     abstract getFirestoreRep();
     abstract createNew(orderNr);
@@ -13,7 +14,7 @@ export abstract class Item {
     id?: string;
     orderNr: number;
     // True if it is temporary empty. False if it is in database
-    localOnly: boolean = true;
+    localOnly?: boolean = true;
     status: Status = Status.active;
 
     statusString = "active";
@@ -50,6 +51,9 @@ export abstract class Item {
         }
         if(obj.orderNr) {
             this.orderNr = obj.orderNr;
+        }
+        if(obj.subcategory) {
+            this.subcategory = obj.subcategory;
         }
     }
 }

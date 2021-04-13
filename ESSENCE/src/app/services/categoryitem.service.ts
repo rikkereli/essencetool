@@ -10,6 +10,7 @@ import { CategoryItem, Status } from '../model';
 import { ChosenFeature } from '../model/chosenFeature';
 import { Criteria } from '../model/criteria';
 import { map } from 'rxjs/operators';
+import { FirestoreReferencesService } from './firestore-references.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +20,31 @@ export class CategoryitemService {
 
   constructor(
     private firestore: AngularFirestore,
+    public firestoreReferenceService: FirestoreReferencesService,
     public router: Router, // The application router
     ) { 
     this.inFocusObject = <BehaviorSubject<{itemId:string, parentCategory: string}>> new BehaviorSubject( { itemId: "", parentCategory: ""});
 
   }
+  getItems(category:string) {
+    return this.firestoreReferenceService.getCategory(category).valueChanges().pipe(map(
+      items => 
+        items.map(item => {
+          var categoryItem = new CategoryItem(item.orderNr)
+          categoryItem.updateItemValue(item);
+          return categoryItem
+        })       
+    ));
+  }
 
     // Adds a document with the ID and content to firestore
-    addItem(categoryItem: CategoryItem, category: string) {
-      this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(category).doc(categoryItem.id).set({text:categoryItem.text, orderNr:categoryItem.orderNr, status: Status.active});
-    }
+  addItem(categoryItem: CategoryItem, category: string) {
+    this.firestoreReferenceService.getCategory(category).doc(categoryItem.id).set({text:categoryItem.text, orderNr:categoryItem.orderNr, status: Status.active});
+  }
   
   // Get items that are connected to this item 
   getConnectedItems(focusItemId: string, focusItemCategory: string) {
-    var project = JSON.parse(localStorage.getItem('project'));
-    return this.firestore.collection(ids.diagramsCollection).doc<Project>(project).collection(focusItemCategory).doc(focusItemId).collection<ItemConnection>("connectedItems");
+    return this.firestoreReferenceService.getConnectedItems(focusItemCategory, focusItemId)
   }
 
   addConntectionBetweenItems(focusItemId: string, focusItemCategory: string, connectItemId: string, connectedItemCategory: string) {
@@ -55,10 +66,7 @@ export class CategoryitemService {
   getConnectedItemRef(project: string, focusItemId: string, connectItemId: string, connectedItemCategory: string) {
     return this.firestore.collection(ids.diagramsCollection).doc(project).collection(connectedItemCategory).doc(connectItemId).collection("connectedItems").doc(focusItemId);
   }
-    // Get refrence to specific document
-    itemRefrence(itemId: string, category: string) {
-      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(category).doc(itemId);
-    }
+
     // Gets the current project ID from localstorage
     getCurrentProject() {
       return JSON.parse(localStorage.getItem('project'));
@@ -71,7 +79,7 @@ export class CategoryitemService {
       }
       else {
         // TODO should also delete all subcollections!
-        this.itemRefrence(categoryItem.id, category).delete();
+        this.firestoreReferenceService.categoryItemRefrence(categoryItem.id, category).delete();
       }
     }
   
@@ -82,7 +90,7 @@ export class CategoryitemService {
         console.log("Updating order nr of local item");
       }
       else {
-        this.itemRefrence(categoryItem.id, category).update({orderNr: categoryItem.orderNr});
+        this.firestoreReferenceService.categoryItemRefrence(categoryItem.id, category).update({orderNr: categoryItem.orderNr});
       }
     }
   
@@ -94,7 +102,7 @@ export class CategoryitemService {
       }
       // If the item is not local, the ID is already present and only the text should be updated
       else{
-        this.itemRefrence(cateogryItem.id, category).update({text: cateogryItem.text});
+        this.firestoreReferenceService.categoryItemRefrence(cateogryItem.id, category).update({text: cateogryItem.text});
       }
     }
     // Updates the status of the item. 
@@ -104,7 +112,7 @@ export class CategoryitemService {
         console.log("Trying to update status on non local item. This should not be possible");
       }
       else {
-        this.itemRefrence(categoryItem.id, category).update({status: categoryItem.status});
+        this.firestoreReferenceService.categoryItemRefrence(categoryItem.id, category).update({status: categoryItem.status});
       }
     }
     getFeatures(){

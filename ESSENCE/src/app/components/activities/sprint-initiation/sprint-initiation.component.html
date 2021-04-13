@@ -10,7 +10,7 @@
         </div>
         <div *ngFor="let feature of features">
             <div *ngIf="feature.chosen === 'true'">
-                <app-category-box *ngIf="(feature$ | async) as Category" [category]="Category" [criteria]="true" [parentFeature]="feature"></app-category-box>
+                <app-category-box [criteria]="true" [parentFeature]="feature"></app-category-box>
             </div>
         </div>
     </div>

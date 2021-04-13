@@ -2,13 +2,13 @@
     <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
 
     <div class="table-top">
-        <div class="name">Ecology idea</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the strength of the idea">Strength</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the weaknesses of the idea">Weakness</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the threat of the idea">Threat</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the oppotunities of the idea">Oppotunity</div>
-        <div class="value" title="The total value representing the utility of the idea">Total</div>
-        <div class="value" title="Select the ecology object for the project">Select</div>
+        <div class="name" title={{ecologyIdeaTooltip}}>Ecology idea</div>
+        <div class="value" title={{strengthTooltip}}>Strength</div>
+        <div class="value" title={{weaknessTooltip}}>Weakness</div>
+        <div class="value" title={{oppotunityTooltip}}>Oppotunity</div>
+        <div class="value" title={{threatTooltip}}>Threat</div>
+        <div class="value" title={{totalTooltip}}>Total</div>
+        <div class="value" title={{selectTooltip}}>Select</div>
     </div>
     <div *ngFor="let ecologyObject of categoryBoxService.categoryIDS">
         <app-swotitem (valueChangedEvent)="categoryBoxService.updateItem($event)" [ecologyItem]="ecologyObject"></app-swotitem>

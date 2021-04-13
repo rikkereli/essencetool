@@ -12,6 +12,7 @@ import { ProjectService } from './project.service';
 })
 export class NavbarService {
 
+  printing = false;
   currentProject: Subscription = new Subscription(); 
   currentPage: BehaviorSubject<string> = new BehaviorSubject("dashboard");
   currentRoute;
@@ -58,21 +59,23 @@ export class NavbarService {
             router.navigate(['/dashboard/'+details.projectStage]);
             this.currentPage.next(details.projectStage);
             // Update current title for project
-            this.currentTitle = 'Project "' + details.projectName + '"';
+            this.projectName = details.projectName;
           })
         }
       })
       // Get details when currentpage changes
       this.currentPage.subscribe(page => {
         this.firestore.collection('pages').doc<Page>(page).valueChanges().subscribe(
-          help => 
-          this.currentPageDetails = help);
+          help => {
+          this.currentPageDetails = help
+          this.currentTitle = this.projectName + ": " + this.currentPageDetails.title });
       })
   }
+  projectName = "";
   currentPageDetails: Page = new Page();
   currentTitle: string = "";
   projectStage: string;
-  
+  currentTitleBas: string = "";
   stages: string[] = ["challengeDetected", "ecologyObject", "leveragePoint", "initialProblem", "axisAlignment","prospectRepresentation", "prospectRepresentationExpansion", "sprintInitiation", "sprintWork", "RSTReview","GetComments", "GenerateCriteria", "UpdateDiagram"]
  
   previousStage(){

@@ -2,7 +2,7 @@
     <div *ngIf="challengeInfo$ | async as challengeInfo">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">
-                Filling out
+                {{challengeInfo.displayTitle}}
             </h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
   
@@ -17,19 +17,22 @@
     </div>
 </ng-template>
 <div *ngIf="formGroup" [formGroup]="formGroup" id="contentContainer" class="contentContainer">
-    <h3>{{navbarService.currentPageDetails.title}}</h3>
-    <div class="card challengeBox" [ngClass]="paradigm">
-        <div class="card-header challengeHeader">
-            <h4>Challenge</h4>
-            <div class="example-button-container">
-                <button class="helpButton" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
-                    <mat-icon>help</mat-icon>
-                </button>
-            </div>
+    <h3></h3>
+    <div class="tutorial">
+        <mat-icon aria-hidden="false">arrow_backward</mat-icon>
+        <h3>{{description[i]}}</h3>
+        <mat-icon aria-hidden="false">arrow_forward</mat-icon>
+    </div>
+    <div class="challengeHeader">
+        <h4>The challenge for this project is:</h4>
+        <div class="example-button-container">
+            <button class="helpButton" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
+                <mat-icon>help</mat-icon>
+            </button>
         </div>
-        <div class="card-body challengeBody">
-            <textarea id="chal" formControlName="challenge" class="challengeContent" (input)="updateChallenge($event)"></textarea>
-        </div>
+    </div>
+    <input id="chal" formControlName="challenge" class="challengeContent" placeholder="What is the overall challenge for this project?" (input)="categoryService.updateChallenge(challenge.value)">
+    <div class="challengeBox">
     </div>
     <div class="errors" *ngIf="challenge.invalid">
         <div *ngIf="challenge.errors.minlength">

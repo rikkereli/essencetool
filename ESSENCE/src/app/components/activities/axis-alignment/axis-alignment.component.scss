@@ -2,6 +2,91 @@ h1 {
     color: white;
 }
 
+$product-view-color: rgb(212, 59, 59);
+$paradigm-view-color: rgb(241, 197, 50);
+.prospectDimension {}
+
 .projectItem {
     display: block;
+}
+
+.title {
+    margin: 10px;
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+.problemTitle {
+    color: $paradigm-view-color;
+}
+
+.solutionTitle {
+    color: $product-view-color;
+}
+
+.problemTitle,
+.solutionTitle {
+    background-color: transparent;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.horizontalAxis {
+    height: 2px;
+    width: 50px;
+    background-color: white;
+}
+
+.verticalAxis {
+    height: 50px;
+    width: 2px;
+    background-color: white;
+}
+
+.verticalPadding {
+    height: 20px;
+}
+
+.categoryColumn {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.text {
+    color: white;
+    padding: 20px;
+}
+
+.categoryRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+.selectedContainer {
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 15px;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+app-next-activity {
+    width: fit-content;
 }

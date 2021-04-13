@@ -1,13 +1,13 @@
 <div class="contentContainer">
     <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
     <div class="table-top">
-        <div class="name">Leverage point idea</div>
-        <div class="value" title="Value between 0 and 10 reprecenting the power of the idea">Power</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the cost of the idea">Cost</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the risk of the idea">Risk</div>
-        <div class="value" title="Value between 0 and 5 reprecenting the time the idea will take">Time</div>
-        <div class="value" title="The total value representing the utility of the idea">Total</div>
-        <div class="value" title="Select the ecology object for the project">Select</div>
+        <div class="name" title={{leveragePointIdeaTooltip}}>Leverage point idea</div>
+        <div class="value" title={{powerTooltip}}>Power</div>
+        <div class="value" title={{costTooltip}}>Cost</div>
+        <div class="value" title={{riskTooltip}}>Risk</div>
+        <div class="value" title={{timeTooltip}}>Time</div>
+        <div class="value" title={{totalTooltip}}>Total</div>
+        <div class="value" title={{selectTooltip}}>Select</div>
     </div>
     <div *ngFor="let leveragePoint of categoryBoxService.categoryIDS">
         <app-pcrtitem (valueChangedEvent)="categoryBoxService.updateItem($event)" [leverageItem]="leveragePoint"></app-pcrtitem>

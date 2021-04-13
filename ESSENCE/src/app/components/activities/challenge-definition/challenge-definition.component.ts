@@ -20,9 +20,7 @@ export class ChallengeDefinitionComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private categoryService: CategoryService,
-    private projectService: ProjectService,
-    private route: ActivatedRoute,
+    public categoryService: CategoryService,
     private formBuilder: FormBuilder,
     public navbarService: NavbarService
   ) { 
@@ -30,6 +28,9 @@ export class ChallengeDefinitionComponent implements OnInit {
     navbarService.onProjectActivityPage = true;
   }
 
+  i = 0;
+  description = ["Most development projects are based on a challenge they are trying to solve","The challenge is the motivation behind the project. The purpose of the project is then to develop something that can metigate the challenge.", "Your first task is to define the challenge for the project"];
+  questions = ["What is the purpose of the project?", "Why do you want the project to contribute with?"];
   challengeInfo$: Observable<Category>;
   challengeText: string;
   id: string;
@@ -51,13 +52,5 @@ export class ChallengeDefinitionComponent implements OnInit {
   
   formGroup: FormGroup;
   paradigm = ids.paradigm;
-  nextActivity() {
-    // Go to next activity in project
-    this.projectService.updateProjectStage(routes.ecologyObjectActivity);
-  }
-  updateChallenge(event) {
-    this.categoryService.updateChallenge(event.target.value)
-  }
-  
   get challenge() {return this.formGroup.get('challenge');}
 }

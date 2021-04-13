@@ -2,6 +2,51 @@ h1 {
     color: white;
 }
 
+.contentRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.horizontalDivider {
+    background-color: white;
+    height: 5px;
+    width: 100%;
+}
+
+.verticalDivider {
+    background-color: white;
+    height: 100%;
+    width: 5px;
+}
+
+.contentColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .projectItem {
     display: block;
+}
+
+$product-view-color: rgb(212, 59, 59);
+$paradigm-view-color: rgb(241, 197, 50);
+.projectItem {
+    display: block;
+}
+
+h4 {
+    color: white;
+}
+
+.problemTitle {
+    color: $paradigm-view-color;
+}
+
+.solutionTitle {
+    color: $product-view-color;
 }
