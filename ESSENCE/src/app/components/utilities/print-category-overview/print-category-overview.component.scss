@@ -3,8 +3,12 @@
     flex-direction: row;
 }
 
+.printPage {
+    width: fit-content;
+}
+
 app-print-category {
-    width: 100%;
+    width: fit-content;
     flex-grow: 1;
 }
 

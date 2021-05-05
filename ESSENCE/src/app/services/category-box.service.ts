@@ -146,17 +146,22 @@ bottomBoxActive() {
     }
   // Delete item from firestore and move all items below
   deleteItem(categoryItem) {
+
     // Save orderNr from category item 
-    var orderNr = categoryItem.orderNr;
     // Delete item from firestore
     if(categoryItem.localOnly) {
       // Should not try to delete local item 
       console.log("Trying to delete local item. This should not be possible");
     }
+    else if(this.singleItemCategory) {
+      console.log("Single item category should not be deleted.");
+    }
     else {
+      var orderNr = categoryItem.orderNr;
+
       // TODO should also delete all subcollections!
       this.categoryReference.doc(categoryItem.id).delete();
-    }
+    
     // Go through all other items in category, move order nr by one.
     this.categoryIDS.forEach(element => {
       if(element.orderNr > orderNr && !element.localOnly) {
@@ -165,6 +170,7 @@ bottomBoxActive() {
         this.updateItem(element);
       }
     });
+  }
   }
 
   getItems() {

@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
     // The user should be able to close dialog when clicking outside
     dialogConfig.disableClose = false;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "inherit";
+    dialogConfig.height = "100%";
     dialogConfig.width = "fit-content";
     dialogConfig.panelClass = "panel"; 
     const modalDialog = this.matDialog.open(PrintCategoryOverviewComponent, dialogConfig);
@@ -68,7 +68,13 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       let data = document.getElementById('printPage');
       html2canvas(data).then(canvas => {
-        var pdf = new jspdf.jsPDF('p', 'pt', [canvas.width, canvas.height])
+
+        if(canvas.width > canvas.height) {
+          var pdf = new jspdf.jsPDF('l', 'pt', [canvas.width, canvas.height])
+        }
+        else {
+          var pdf = new jspdf.jsPDF('p', 'pt', [canvas.width, canvas.height])
+        }
         var imgData = canvas.toDataURL("image/jepg", 1.0);
         pdf.addImage(imgData,0,0,canvas.width, canvas.height)
         //let HTML_Width = canvas.width;

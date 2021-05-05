@@ -89,6 +89,59 @@ mat-toolbar>span {
     flex-direction: row;
 }
 
+.viewHelp {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 25px;
+}
+
+.viewTop {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.viewBottom {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+$product-view-color: rgb(212, 59, 59);
+$project-view-color: rgb(50, 136, 29);
+$paradigm-view-color: rgb(241, 197, 50);
+$process-view-color: #369;
+.paradigmHelp {
+    background-color: $paradigm-view-color;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 80%;
+}
+
+.productHelp {
+    background-color: $product-view-color;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 80%;
+}
+
+.projectHelp {
+    background-color: $project-view-color;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 90%;
+}
+
+.processHelp {
+    background-color: $process-view-color;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 90%;
+}
+
 .list {
     border: solid 1px #ccc;
     min-height: 60px;

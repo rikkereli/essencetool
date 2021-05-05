@@ -25,13 +25,29 @@ a>* {
     color: white;
 }
 
+.arrowMarker {
+    fill: red;
+}
+
+.arrow {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+}
+
+.line {
+    stroke: red;
+    stroke-width: 2;
+    marker-end: url(#markerArrow);
+}
+
 .challengeBox {
     border-color: $paradigm-view-color;
     border-style: solid;
     border-width: 5px;
     background-color: transparent;
-    width: 400px;
-    height: 250px;
+    width: 500px;
+    height: 300px;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -50,7 +66,17 @@ a>* {
 mat-icon {
     color: white;
     height: inherit;
-    width: 50px;
+    margin: 20px;
+}
+
+.placeholder {
+    width: 64px;
+}
+
+.curved {}
+
+.challengeText {
+    color: white;
 }
 
 .tutorial {
@@ -59,16 +85,30 @@ mat-icon {
     align-items: center;
 }
 
+.tutorialText {
+    width: 400px;
+    text-align: center;
+}
+
 .helpButton {
     color: transparent;
     background-color: transparent;
     height: fit-content;
+    padding: 0px;
+    margin: 0px;
 }
 
 .example-button-container {
     display: flex;
     justify-content: center;
     width: 120px;
+    padding: 0px;
+    margin: 0px;
+}
+
+mat-icon {
+    padding: 0px;
+    margin: 0px;
 }
 
 .errors {
@@ -88,4 +128,6 @@ mat-icon {
 
 h4 {
     color: white;
+    margin: 0px;
+    text-align: start;
 }

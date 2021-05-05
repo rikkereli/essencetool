@@ -16,31 +16,53 @@
         </div>
     </div>
 </ng-template>
+<svg class="arrow" *ngIf="placement">
+    <defs>
+        <marker id="markerArrow" markerWidth="13" markerHeight="13" refX="2" refY="6"
+               orient="auto">
+            <path class="arrowMarker" d="M2,2 L2,11 L10,6 L2,2" />
+        </marker>
+    </defs>
+    
+    <line [attr.x1]="placement.textX" [attr.y1]="placement.textY" [attr.x2]="placement.circleX" [attr.y2]="placement.circleY" class="line" />
+  </svg>
 <div *ngIf="formGroup" [formGroup]="formGroup" id="contentContainer" class="contentContainer">
     <h3></h3>
-    <div class="tutorial">
-        <mat-icon aria-hidden="false">arrow_backward</mat-icon>
-        <h3>{{description[i]}}</h3>
-        <mat-icon aria-hidden="false">arrow_forward</mat-icon>
+    <div class="tutorial" *ngIf="i < description.length">
+        <a (click)="previousInfo()" *ngIf="!(i == 0)">
+            <mat-icon aria-hidden="false">arrow_backward</mat-icon>
+        </a>
+        <div class="placeholder" *ngIf="(i == 0)">
+        </div>
+
+        <div id="challengeCircle" class="challengeBox">
+            <h3 id="challengeText" class="tutorialText">{{description[i]}}</h3>
+        </div>
+        <a (click)="nextInfo()">
+            <mat-icon aria-hidden="false" click="">arrow_forward</mat-icon>
+        </a>
     </div>
-    <div class="challengeHeader">
-        <h4>The challenge for this project is:</h4>
-        <div class="example-button-container">
+    <div class="contentContainer" *ngIf="i >= description.length">
+        <div class="challengeHeader">
             <button class="helpButton" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
                 <mat-icon>help</mat-icon>
             </button>
+
+            <h4>The challenge for this project is:</h4>
+
         </div>
-    </div>
-    <input id="chal" formControlName="challenge" class="challengeContent" placeholder="What is the overall challenge for this project?" (input)="categoryService.updateChallenge(challenge.value)">
-    <div class="challengeBox">
-    </div>
-    <div class="errors" *ngIf="challenge.invalid">
-        <div *ngIf="challenge.errors.minlength">
-            <h4>{{minLengthErrorMessage}}</h4>
+        <input id="chal" formControlName="challenge" class="challengeContent" placeholder="What is the overall challenge for this project?" (input)="categoryService.updateChallenge(challenge.value)">
+
+        <div class="challengeBox">
         </div>
-        <div *ngIf="challenge.errors.required">
-            <h4>{{requiredErrorMessage}}</h4>
+        <div class="errors" *ngIf="challenge.invalid">
+            <div *ngIf="challenge.errors.minlength">
+                <h4>{{minLengthErrorMessage}}</h4>
+            </div>
+            <div *ngIf="challenge.errors.required">
+                <h4>{{requiredErrorMessage}}</h4>
+            </div>
         </div>
+        <app-next-activity *ngIf="challenge.valid"></app-next-activity>
     </div>
-    <app-next-activity *ngIf="challenge.valid"></app-next-activity>
 </div>
