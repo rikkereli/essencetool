@@ -54,22 +54,12 @@ export class CategoryService {
   }
 
   updateChallenge(value: string) {
-    this.challengeRef().get().subscribe(doc => doc.forEach(doc => this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic).doc(doc.id).update({text:value})));
+    this.challengeRef().get().subscribe(doc => doc.forEach(doc => this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problem).doc(doc.id).update({text:value})));
   }
   challengeRef() {
-    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic, ref => ref.where("subcategory", '==', "challenge").limit(1));
+    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problem, ref => ref.where("subcategory", '==', "challenge").limit(1));
   }
 
-  getSubCategory(subCategory: string) {
-    return this.subCategoryRef(subCategory).valueChanges();
-  }
-
-  updateSubCategory(value: string, subCategory: string) {
-    this.subCategoryRef(subCategory).get().subscribe(doc => doc.forEach(doc => this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic).doc(doc.id).update({text:value})));
-  }
-  subCategoryRef(subCategory: string) {
-    return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.problematic, ref => ref.where("subcategory", '==', subCategory).limit(1));
-  }
   // Gets the current project ID from localstorage
   getCurrentProject() {
     return JSON.parse(localStorage.getItem('project'));

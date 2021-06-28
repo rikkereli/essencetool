@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { CategoryOptions } from '../assets/categories';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResizeService {
-  mouseoverObject: BehaviorSubject<{currentHover:string}>;
+  mouseoverObject: BehaviorSubject<{currentHover:CategoryOptions}>;
 
 
   constructor() { 
-    this.mouseoverObject = <BehaviorSubject<{currentHover:string}>> new BehaviorSubject({currentHover: ''});
+    this.mouseoverObject = <BehaviorSubject<{currentHover:CategoryOptions}>> new BehaviorSubject({currentHover: 'none'});
 
   }
 

@@ -1,12 +1,76 @@
-<div class="card containerCard categoryContainer" [ngClass]="view">
-    <div class="card-header" [ngClass]="view">
-        <h4 class="mb-0 titleText" [ngbTooltip]="tooltip"> {{title}}</h4>
+<ng-template #compare let-modal>
+    <div class="modal-background comparedBackground">
+        <div class="modal-header">
+
+        </div>
+        <div class="modal-body compareBody">
+            <app-pcrt-tool></app-pcrt-tool>
+        </div>
     </div>
-    <div class="card-body itemsBox flex-grow-1" [formGroup]=categoryBoxService.itemsFormGroup [ngClass]="view">
-        <div *ngFor="let item of categoryBoxService.categoryIDS">
-            <app-category-item *ngIf="parent" (itemChangedEvent)="categoryBoxService.updateItem($event)" (focusOnEmptyInputEvent)="categoryBoxService.addBottomBox()" (focusOutOfEmptyInputEvent)="categoryBoxService.removeEmptyItems($event)" [categoryItem]="item" [parentCategory]="parent"
-                [formControlName]="item.id">
-            </app-category-item>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-background">
+        <div class="modal-header">
+            <h1 class="modal-title" id="modal-basic-title">
+                {{title}}
+            </h1>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')"> 
+  
+            <span aria-hidden="true"> 
+                × 
+            </span> 
+        </button>
+        </div>
+        <div class="modal-body">
+            <div id="scroll" [innerHTML]="help"></div>
+            <img class="image" src={{image}} alt="image">
+        </div>
+    </div>
+</ng-template>
+<div class="categoryBoxContainer" [ngClass]="[isSelectedViewClass,isSelectedCategoryClass]">
+    <div class="containerRow reasonableContainer" *ngIf="!reasoningDone && !isInitialKnowledge">
+        <p class="reasonableText">
+            {{categoriesHelp.getReasoning(category)}}
+        </p>
+        <button class="reasonableButton" mat-button (click)="reasonDone()">
+        <mat-icon class="reasonableIcon">
+            check
+        </mat-icon>
+    </button>
+    </div>
+    <div class="card containerCard categoryContainer" [ngClass]="[view, shouldBeUpdatedClass,isSelectedCategoryClass]">
+        <div class="card-header containerRow">
+            <h4 class="mb-0 titleText" [ngbTooltip]="tooltip" [ngClass]="[isSelectedCategoryClass, shouldBeUpdatedClass]"> {{title}}</h4>
+            <button class="helpButton" *ngIf="isSelectedCategory && !singleItemCategory" (click)="displayCompare(compare)" mat-button aria-label="Example icon button with a heart icon">
+            <mat-icon>compare</mat-icon>
+        </button>
+            <button class="helpButton" *ngIf="isSelectedCategory" (click)="displayHelp(content)" mat-button aria-label="Example icon button with a heart icon">
+            <mat-icon>help</mat-icon>
+        </button>
+            <button *ngIf="!isSelectedCategory" [ngClass]="shouldBeUpdatedClass" class="editButton" (click)="editCategory()" mat-button aria-label="Example icon button with a heart icon">
+                <mat-icon>edit_note</mat-icon>
+            </button>
+            <button *ngIf="!shouldDisplayContent && !isSelectedCategory" [ngClass]="shouldBeUpdatedClass" class="editButton" (click)="showContent()" mat-button aria-label="Example icon button with a heart icon">
+            <mat-icon>arrow_circle_down</mat-icon>
+        </button>
+            <button *ngIf="shouldDisplayContent && !isSelectedCategory" [ngClass]="shouldBeUpdatedClass" class="editButton" (click)="hideContent()" mat-button aria-label="Example icon button with a heart icon">
+            <mat-icon>arrow_circle_up</mat-icon>
+        </button>
+
+        </div>
+        <div *ngIf="isSelectedCategory" class="card-body contentDisplay flex-grow-1 " [formGroup]=categoryBoxService.itemsFormGroup>
+            <div *ngFor="let item of categoryBoxService.categoryIDS ">
+                <app-category-item *ngIf="parent && (item.status == 1)" [id]="getIdObject(item.id)" (itemChangedEvent)="categoryBoxService.updateItem($event) " (focusOnEmptyInputEvent)="categoryBoxService.addBottomBox() " (focusOutOfEmptyInputEvent)="categoryBoxService.removeEmptyItems($event)
+        " [categoryItem]="item" [parentCategory]="category" [formControlName]="item.id ">
+                </app-category-item>
+            </div>
+        </div>
+
+        <div *ngIf="shouldDisplayContent && !isSelectedCategory" class="card-body exampleDisplay flex-grow-1 " [formGroup]=categoryBoxService.itemsFormGroup>
+            <div *ngFor="let item of categoryBoxService.categoryIDS">
+                <p [appCateogryItemDisplay]="getIdObject(item.id)">{{item.text}}</p>
+            </div>
         </div>
     </div>
 </div>

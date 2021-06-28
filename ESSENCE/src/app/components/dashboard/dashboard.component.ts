@@ -10,6 +10,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CategoryOverviewComponent } from '../utilities/category-overview/category-overview.component';
 import { PrintCategoryOverviewComponent } from '../utilities/print-category-overview/print-category-overview.component';
+import { ScenarioToolComponent } from '../tools/scenario-tool/scenario-tool.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -107,5 +108,15 @@ export class DashboardComponent implements OnInit {
   }
   openWordList() {
     
+  }
+
+  scenarios() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "800px";
+    dialogConfig.width = "1100px";
+
+    const modalDialog = this.matDialog.open(ScenarioToolComponent, dialogConfig);
   }
 }

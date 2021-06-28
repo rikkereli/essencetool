@@ -12,20 +12,9 @@ import { VerifyEmailComponent } from './components/auth/verify-email/verify-emai
 import {AuthGuard} from './shared/guard/auth.guard';
 import * as routeNames from './assets/routes';
 import { LoggedinGuard } from './shared/guard/loggedin.guard';
-import { ChallengeDefinitionComponent } from './components/activities/challenge-definition/challenge-definition.component';
-import { PreProjectComponent } from './components/activities/pre-project/pre-project.component';
-import { EcologyObjectComponent } from './components/activities/ecology-object/ecology-object.component';
-import { LeveragePointComponent } from './components/activities/leverage-point/leverage-point.component';
-import { InitialProblemComponent } from './components/activities/initial-problem/initial-problem.component';
-import { AxisAlignmentComponent } from './components/activities/axis-alignment/axis-alignment.component';
-import { RstReviewComponent } from './components/activities/rst-review/rst-review.component';
-import { ProspectRepesentationGenerationComponent } from './components/activities/prospect-repesentation-generation/prospect-repesentation-generation.component';
-import { ProspectRepesentationExpansionComponent } from './components/activities/prospect-repesentation-expansion/prospect-repesentation-expansion.component';
-import { RstReviewCommentsComponent } from './components/activities/rst-review-comments/rst-review-comments.component';
-import { RstReviewCriteriaComponent } from './components/activities/rst-review-criteria/rst-review-criteria.component';
-import { RstReviewUpdateDiagramsComponent } from './components/activities/rst-review-update-diagrams/rst-review-update-diagrams.component';
-import { SprintInitiationComponent } from './components/activities/sprint-initiation/sprint-initiation.component';
-import { SprintWorkComponent } from './components/activities/sprint-work/sprint-work.component';
+import { SelectInitialKnowledgeComponent } from './components/activities/select-initial-knowledge/select-initial-knowledge.component';
+import { UpdateCategoryComponent } from './components/activities/update-category/update-category.component';
+import { QuestionKnowledgeComponent } from './components/activities/question-knowledge/question-knowledge.component';
 
 const routes: Routes = [
   //{ path: '**', redirectTo:'/dashboard'},
@@ -39,19 +28,9 @@ const routes: Routes = [
     { path: 'diagramTool/:diagramId', component: CategoryOverviewComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'diagramOverview', component: CategoryOverviewComponent},
-    { path: routeNames.challengeDetectedActivity, component: ChallengeDefinitionComponent},
-    { path: routeNames.ecologyObjectActivity, component: EcologyObjectComponent},
-    { path: routeNames.leveragePointActivity, component: LeveragePointComponent},
-    { path: routeNames.initialProblemActivity, component: InitialProblemComponent},
-    { path: routeNames.axixAlignmentActivity, component: AxisAlignmentComponent},
-    { path: routeNames.RSTReviewActivity, component: RstReviewComponent},
-    { path: routeNames.prospectRepresentationActivity, component: ProspectRepesentationGenerationComponent},
-    { path: routeNames.prospectRepresentationExpansionActivity, component: ProspectRepesentationExpansionComponent},
-    { path: routeNames.RSTReviewGetCommentsActivity, component: RstReviewCommentsComponent},
-    { path: routeNames.RSTReviewGenerateCriteriaActivity, component: RstReviewCriteriaComponent},
-    { path: routeNames.RSTReviewupdateDiagramActivity, component: RstReviewUpdateDiagramsComponent},
-    { path: routeNames.sprintInitiationActivity, component: SprintInitiationComponent},
-    { path: routeNames.sprintWorkActivity, component: SprintWorkComponent},
+    { path: routeNames.updateCategory, component: UpdateCategoryComponent},
+    { path: routeNames.initialKnowledgeActivity, component: SelectInitialKnowledgeComponent},
+    { path: routeNames.checkKnowledge, component: QuestionKnowledgeComponent},
   ]}
 ];
 

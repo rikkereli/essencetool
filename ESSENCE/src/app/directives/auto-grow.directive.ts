@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
-import { Categories } from '../assets/categories';
+import { Categories, CategoryOptions } from '../assets/categories';
 import { ResizeService } from '../services/resize.service';
 @Directive({
   selector: '[appAutoGrow]',
@@ -7,7 +7,7 @@ import { ResizeService } from '../services/resize.service';
 })
 export class AutoGrowDirective {
 
-  @Input() appAutoGrow;
+  @Input() appAutoGrow: CategoryOptions;
   // The opacity that dimmed items should have
   fadedOpacity = 0.3;
 
@@ -17,7 +17,7 @@ export class AutoGrowDirective {
       // Initiate connectedCategories
       this.resizeService.mouseoverObject.subscribe(
       value => {
-        if(value.currentHover === "") {
+        if(value.currentHover === "none") {
           // If mouse is currently not over any item, the category should be solid
           this.opacity = 1;
         }
@@ -51,6 +51,6 @@ export class AutoGrowDirective {
   }
   // If mouse leaves category, broadcast to all categories
   @HostListener('mouseleave') onMouseLeave() {
-    this.resizeService.mouseoverObject.next({currentHover:""});
+    this.resizeService.mouseoverObject.next({currentHover:"none"});
   }
 }

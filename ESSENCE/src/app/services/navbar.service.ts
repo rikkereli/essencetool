@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router, RoutesRecognized } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter } from 'rxjs/internal/operators/filter';
 import { Page } from '../model/page';
 import { Project } from '../model/project';
 import { ProjectService } from './project.service';
@@ -19,6 +18,7 @@ export class NavbarService {
   onProjectActivityPage = false;
   onProfile = false;
   onProjects = false;
+
   constructor(
     private router: Router, 
     private activatedRoute: ActivatedRoute,

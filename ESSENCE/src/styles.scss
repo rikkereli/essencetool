@@ -11,19 +11,29 @@ $project-view-color: rgb(50, 136, 29);
 $paradigm-view-color: rgb(241, 197, 50);
 $process-view-color: #369;
 .paradigm {
-    background-color: $paradigm-view-color!important;
+    background-color: $paradigm-view-color;
 }
 
 .process {
-    background-color: $process-view-color!important;
+    background-color: $process-view-color;
 }
 
 .project {
-    background-color: $project-view-color!important;
+    background-color: $project-view-color;
 }
 
 .product {
-    background-color: $product-view-color!important;
+    background-color: $product-view-color;
+}
+
+.containerRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerColumn {
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -73,6 +83,16 @@ h1.page-header {
     margin-bottom: 10px;
 }
 
+:root {
+    --primary-color: #fff; // white
+    --background-color: #e5e5e5; // light grey
+    --text-color: #ffffff; // dark grey
+    --product-view-color: rgb(212, 59, 59);
+    --project-view-color: rgb(50, 136, 29);
+    --paradigm-view-color: rgb(241, 197, 50);
+    --process-view-color: #369;
+}
+
 html,
 body {
     height: 100%;
@@ -83,6 +103,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     color: white;
     background-color: rgb(32, 36, 47)!important;
+    color: white!important;
 }
 
 .backdrop {

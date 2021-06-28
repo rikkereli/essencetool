@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import * as Model from '../model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import * as ids from './../assets/vars';
-import { ItemConnection } from '../model/itemConnection';
-import { Project } from '../model/project';
 import { CategoryItem, Status } from '../model';
 import { ChosenFeature } from '../model/chosenFeature';
 import { Criteria } from '../model/criteria';
 import { map } from 'rxjs/operators';
 import { FirestoreReferencesService } from './firestore-references.service';
+import { CategoryOptions } from '../assets/categories';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryitemService {
-  inFocusObject: BehaviorSubject<{itemId: string, parentCategory: string}>;
+  inFocusObject: BehaviorSubject<{itemId: string, parentCategory: CategoryOptions}>;
+  connectObject: BehaviorSubject<{itemId: string, parentCategory: CategoryOptions}>;
 
   constructor(
     private firestore: AngularFirestore,
     public firestoreReferenceService: FirestoreReferencesService,
     public router: Router, // The application router
     ) { 
-    this.inFocusObject = <BehaviorSubject<{itemId:string, parentCategory: string}>> new BehaviorSubject( { itemId: "", parentCategory: ""});
-
+    this.inFocusObject = <BehaviorSubject<{itemId:string, parentCategory: CategoryOptions}>> new BehaviorSubject( { itemId: "none", parentCategory: "none"});
+    this.connectObject = <BehaviorSubject<{itemId:string, parentCategory: CategoryOptions}>> new BehaviorSubject( { itemId: "none", parentCategory: "none"});
   }
   getItems(category:string) {
     return this.firestoreReferenceService.getCategory(category).valueChanges().pipe(map(
@@ -50,8 +49,8 @@ export class CategoryitemService {
   addConntectionBetweenItems(focusItemId: string, focusItemCategory: string, connectItemId: string, connectedItemCategory: string) {
     var project = JSON.parse(localStorage.getItem('project'));
 
-    this.getFocusItemRef(project, focusItemId, focusItemCategory, connectItemId).set({itemId: connectItemId});    
-    this.getConnectedItemRef(project, focusItemId,connectItemId,connectedItemCategory).set({itemId: focusItemId});
+    this.getFocusItemRef(project, focusItemId, focusItemCategory, connectItemId).set({itemId: connectItemId, parentCategory: connectedItemCategory});    
+    this.getConnectedItemRef(project, focusItemId,connectItemId,connectedItemCategory).set({itemId: focusItemId, parentCategory: focusItemCategory});
   }
 
   removeConnectionsBetweenItems(focusItemId: string, focusItemCategory: string, connectItemId: string, connectedItemCategory: string) {
@@ -116,7 +115,7 @@ export class CategoryitemService {
       }
     }
     getFeatures(){
-      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<ChosenFeature>(ids.feature).snapshotChanges().pipe(map(
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection<ChosenFeature>(ids.features).snapshotChanges().pipe(map(
         features => {
           return features.map(feature => {
             var element = {id: feature.payload.doc['id'], ...feature.payload.doc.data()};
@@ -128,13 +127,13 @@ export class CategoryitemService {
     }
     // Return criteria for feature
     getCriterias(feature: string) {
-      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(feature).collection<CategoryItem>(ids.criteriaCollection);
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.features).doc(feature).collection<CategoryItem>(ids.criteriaCollection);
     }
     updateCriteriaText(feature: string, criteria: Criteria) {
-      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(feature).collection(ids.criteriaCollection).doc(criteria.id).set(criteria);
+      return this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.features).doc(feature).collection(ids.criteriaCollection).doc(criteria.id).set(criteria);
     }
 
     toogleFeatureActivity(chosenFeature: ChosenFeature){
-      this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.feature).doc(chosenFeature.id).update({chosen: chosenFeature.chosen});
+      this.firestore.collection(ids.diagramsCollection).doc(this.getCurrentProject()).collection(ids.features).doc(chosenFeature.id).update({chosen: chosenFeature.chosen});
     }
 }

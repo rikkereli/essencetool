@@ -37,3 +37,23 @@
     padding: 0px;
     margin: 10px;
 }
+
+$product-view-color: rgb(212, 59, 59);
+$project-view-color: rgb(50, 136, 29);
+$paradigm-view-color: rgb(241, 197, 50);
+$process-view-color: #369;
+.paradigm {
+    background-color: $paradigm-view-color;
+}
+
+.process {
+    background-color: $process-view-color;
+}
+
+.project {
+    background-color: $project-view-color;
+}
+
+.product {
+    background-color: $product-view-color;
+}

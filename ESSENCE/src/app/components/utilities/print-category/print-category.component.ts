@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Categories, CategoryOptions, ViewOptions } from 'src/app/assets/categories';
 import { Category, CategoryItem } from 'src/app/model';
 import { CategoryBoxService } from 'src/app/services/category-box.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -20,15 +21,13 @@ export class PrintCategoryComponent implements OnInit {
   ) { 
   }
 
-  @Input() category: string;
+  @Input() category: CategoryOptions;
 
-
-  categoryInfo: Category;
+  view: ViewOptions;
+  categoryInfo: Categories = new Categories();
   items$: Observable<CategoryItem[]>;
   ngOnInit(): void {
-    this.categoryService.getCategory(this.category).subscribe(category => {
-      this.categoryInfo = category
-    })
+    this.view = this.categoryInfo.getView(this.category)
     this.items$ = this.categoryItemService.getItems(this.category);
   }
 

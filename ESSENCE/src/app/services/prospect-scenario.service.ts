@@ -54,5 +54,4 @@ export class ProspectScenarioService {
     }
     this.firestoreReferenceService.getQuadrant(quadrantName).update(update);
   }
-
 }

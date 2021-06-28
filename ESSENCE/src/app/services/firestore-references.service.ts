@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, CollectionReference } from '@angular/fire/firestore';
+import { CategoryOptions } from '../assets/categories';
 import * as ids from '../assets/vars';
 import { CategoryItem } from '../model';
 import { Item } from '../model/item';
@@ -31,6 +32,16 @@ export class FirestoreReferencesService {
   getEcologyObjectCollection() {
     return this.getProjectReference().collection<Swotitem>(ids.ecologyObject);
   }
+  getPcrtItemCollection(category: CategoryOptions)
+  {
+    return this.getProjectReference().collection<PcrtItem>(category);
+
+  }
+  getSwotItemCollection(category: CategoryOptions)
+  {
+    return this.getProjectReference().collection<Swotitem>(category);
+
+  }
   getLeveragePointCollection() {
     return this.getProjectReference().collection<PcrtItem>(ids.leveragePoint);
   }
@@ -39,7 +50,7 @@ export class FirestoreReferencesService {
     return this.getCriteriaCollection().doc(parentFeatureId).collection<Item>(ids.criteriaCollection);
   }
   getCriteriaCollection() {
-    return this.getCategory(ids.feature);
+    return this.getCategory(ids.features);
   }
 
   // Get refrence to specific document

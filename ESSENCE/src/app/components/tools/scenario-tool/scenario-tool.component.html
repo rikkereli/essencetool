@@ -1,0 +1,131 @@
+<div class="contentContainer">
+    <mat-tab-group>
+        <mat-tab label="Edit Axis">
+            <div class="categoryRow">
+                <div class="categoryColumn">
+                    <input title={{problemTooltip}} placeholder="Enter problem scenario" class=" problemTitle " (input)="updateAxis($event, 'HorizontalProblemStart') " id="HorizontalProblemStart" value={{HorizontalProblemStart}}>
+                    <input title={{solutionTooltip}} placeholder="Enter solution scenario " class="solutionTitle " (input)="updateAxis($event,'HorizontalSolutionStart') " id="HorizontalSolutionStart" value={{HorizontalSolutionStart}}>
+                </div>
+                <div class="horizontalAxis"></div>
+                <div class="categoryColumn">
+                    <input title={{problemTooltip}} placeholder="Enter problem scenario" class="problemTitle" (input)="updateAxis($event, 'verticalProblemStart')" id="verticalProblemStart" value={{verticalProblemStart}}>
+                    <input title={{solutionTooltip}} placeholder="Enter solution scenario" class=" solutionTitle" (input)="updateAxis($event, 'verticalSolutionStart')" id="verticalSolutionStart" value={{verticalSolutionStart}}>
+                    <div class="verticalPadding"></div>
+                    <div class="verticalAxis"></div>
+                    <div class="problemContainer selectedContainer ">
+                        <h4 class="title ">Selected problem:</h4>
+                        <p class="text ">{{problem}}</p>
+                    </div>
+                    <div class="verticalAxis"></div>
+                    <div class="verticalPadding"></div>
+                    <input class="problemTitle" (input)="updateAxis($event, 'verticalProblemEnd')" value={{verticalProblemEnd}} placeholder="Enter problem scenario" id="verticalProblemEnd" title={{problemTooltip}}>
+                    <input class="solutionTitle
+            " (input)="updateAxis($event,'verticalSolutionEnd') " id="verticalSolutionEnd" value={{verticalSolutionEnd}} placeholder="Enter solution scenario " title={{solutionTooltip}}>
+                </div>
+                <div class="horizontalAxis"></div>
+                <div class="categoryColumn">
+                    <input title={{problemTooltip}} class="problemTitle
+            " (input)="updateAxis($event,'HorizontalProblemEnd') " id="HorizontalProblemEnd" value={{HorizontalProblemEnd}} placeholder="Enter problem scenario ">
+                    <input class="solutionTitle " (input)="updateAxis($event,'HorizontalSolutionEnd') " id="HorizontalSolutionEnd" value={{HorizontalSolutionEnd}} placeholder="Enter solution scenario " title={{solutionTooltip}}>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Enter representation">
+            <div class="contentRow">
+                <div class="contentColumn">
+                    <span class="problemTitle">{{HorizontalProblemStart}}</span>
+                    <span class="solutionTitle">{{HorizontalSolutionStart}}</span>
+                </div>
+                <div class="contentColumn">
+                    <div class="contentColumn">
+                        <span class="problemTitle">{{verticalProblemStart}}</span>
+                        <span class="solutionTitle">{{verticalSolutionStart}}</span>
+                    </div>
+
+                    <div class="contentRow representationBoxRow">
+                        <div class="representationBox">
+                            <app-prospect-scenario-quadrant quadrantName="1"></app-prospect-scenario-quadrant>
+                        </div>
+
+                        <div class="representationBox">
+                            <app-prospect-scenario-quadrant quadrantName="2"></app-prospect-scenario-quadrant>
+                        </div>
+                    </div>
+                    <div class="contentRow representationBoxRow">
+                        <div class="representationBox">
+                            <app-prospect-scenario-quadrant quadrantName="3"></app-prospect-scenario-quadrant>
+                        </div>
+
+                        <div class="representationBox">
+                            <app-prospect-scenario-quadrant quadrantName="4"></app-prospect-scenario-quadrant>
+                        </div>
+                    </div>
+
+                    <div class="contentColumn">
+                        <span class="problemTitle">{{verticalProblemEnd}}</span>
+                        <span class="solutionTitle">{{verticalSolutionEnd}}</span>
+                    </div>
+                </div>
+
+                <div class="contentColumn">
+                    <span class="problemTitle">{{HorizontalProblemEnd}}</span>
+                    <span class="solutionTitle">{{HorizontalSolutionEnd}}</span>
+                </div>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Expand representation">
+            <div class="contentColumn">
+                <div class="contentRow representationWindow" *ngIf="selectedProspect">
+                    <div class="contentColumn">
+                        <div class="contentColumn representationBox">
+                            <div class="contentRow">
+                                <h2>Proposition</h2> -
+                                <h4>: {{selectedProspect.proposition}}</h4>
+                            </div>
+                            <div class="contentRow">
+                                <app-category-box class="categoryBox" appAutoGrow="problem" category="problem"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="leverage" category="leverage"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="solution" category="solution"></app-category-box>
+                            </div>
+                        </div>
+                        <div class="contentColumn representationBox">
+                            <div class="contentRow">
+                                <h2>Metaphor</h2>
+                                <h4>: {{selectedProspect.metaphor}}</h4>
+                            </div>
+                            <div class="contentRow">
+                                <app-category-box class="categoryBox" appAutoGrow="outerEnvironment" category="outerEnvironment"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="innerEnvironment" category="innerEnvironment"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="scope" category="scope"></app-category-box>
+                            </div>
+                        </div>
+                        <div class="contentColumn representationBox">
+                            <div class="contentRow">
+                                <h2>Prototype</h2>
+                                <h4>: {{selectedProspect.prototype}}</h4>
+                            </div>
+                            <div class="contentRow">
+                                <app-category-box class="categoryBox" appAutoGrow="scenarios" category="scenarios"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="features" category="features"></app-category-box>
+                                <app-category-box class="categoryBox" appAutoGrow="valuePropositions" category="valuePropositions"></app-category-box>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentColumn representationBox verticalCategoryBox" *ngIf="selectedProspect">
+                        <div class="contentRow">
+                            <h2>Icon</h2>
+                            <h4>: {{selectedProspect.icon}}</h4>
+                        </div>
+                        <app-category-box class="categoryBox" appAutoGrow="rationale" category="rationale"></app-category-box>
+                        <app-category-box class="categoryBox" appAutoGrow="strategy" category="strategy"></app-category-box>
+                        <app-category-box class="categoryBox" appAutoGrow="tactic" category="tactic"></app-category-box>
+                    </div>
+                    <div *ngIf="!selectedProspect">
+                        <h1>You have to select a prospect scenario</h1>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

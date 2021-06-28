@@ -28,9 +28,10 @@ label {
 
 .selected {
     background-color: gray;
-    border-color: white;
+    border-color: white !important;
 }
 
 .notSelected {
     background-color: gray;
+    border-color: gray !important;
 }

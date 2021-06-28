@@ -1,0 +1,8 @@
+<mat-tab-group>
+    <mat-tab label="PCRT">
+        <app-pcrt-tool label="PCRT" *ngIf="category" [category]="category"></app-pcrt-tool>
+    </mat-tab>
+    <mat-tab label="SWOT">
+        <app-swot-tool label="SWOT" *ngIf="category" [category]="category"></app-swot-tool>
+    </mat-tab>
+</mat-tab-group>

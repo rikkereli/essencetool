@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, HostListener, Input, OnInit } from '@angular/core';
-import { Categories } from '../assets/categories';
+import { Categories, CategoryOptions } from '../assets/categories';
 import { CategoryitemService } from '../services/categoryitem.service';
 
 @Directive({
@@ -7,7 +7,7 @@ import { CategoryitemService } from '../services/categoryitem.service';
 })
 export class CategoryItemButtonDirective implements OnInit {
 
-  @Input() appCategoryItemButton: {itemId: string, parentCategory: string};
+  @Input() appCategoryItemButton: {itemId: string, parentCategory: CategoryOptions};
   categories: Categories = new Categories();
   itemConnections: string[];
   lastFocusItem:{itemId: string, parentCategory: string};
@@ -29,13 +29,13 @@ export class CategoryItemButtonDirective implements OnInit {
       {
 
         // In input selected, save the selected id
-        if(currentFocus.itemId != "") {
+        if(currentFocus.itemId != "none") {
           this.lastFocusItem = currentFocus;
         
         // If another item is in focus, make connection possible
         if(currentFocus.itemId !== this.appCategoryItemButton.itemId) {
 
-          var categoriesConnected =this.categories.areConnected(currentFocus.parentCategory, this.appCategoryItemButton.parentCategory);
+          var categoriesConnected = this.categories.areConnected(currentFocus.parentCategory, this.appCategoryItemButton.parentCategory);
           
           // Connection between items should only be possible in connected categories
           if(categoriesConnected){

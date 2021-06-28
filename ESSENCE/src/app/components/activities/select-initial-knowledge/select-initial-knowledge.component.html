@@ -1,0 +1,99 @@
+<div class="contentContainer">
+    <div *ngIf="categoryUpdateService.selectedView == 'none'">
+        <h1>Select starting point view</h1>
+        <h3>Select an area that you already know about</h3>
+    </div>
+    <h1 *ngIf="categoryUpdateService.selectedView != 'none'">Select level of abstraction</h1>
+
+    <div class="contentRow" *ngIf="categoryUpdateService.selectedView == 'none'">
+
+        <button (click)="SelectView('paradigm')" title={{paradigmTooltip}} class="view_button paradigm">
+                Paradigm: <br/> Knowlege about the project context
+        </button>
+        <div class="contentColumn">
+            <button (click)="SelectView('product')" title={{productTooltip}} class="view_button product">
+                Product: <br/> Knowledge about implementation
+            </button>
+            <button (click)="SelectView('project')" title={{projectTooltip}} class="view_button project">
+                Project: <br/> Knowledge about solution
+            </button>
+            <div class="viewBuffer">
+            </div>
+        </div>
+        <button (click)="SelectView('process')" title={{processTooltip}} class="view_button process">
+            Process: <br/> Knowledge about acceptance criteria
+        </button>
+    </div>
+
+    <div class="contentRow">
+        <div class="contentColumn" *ngIf="categoryUpdateService.selectedView != 'none'">
+            <mat-card class="level">Tactic
+                <br/> -Approach </mat-card>
+            <mat-card class="level">Strategy
+                <br/> -Direction</mat-card>
+            <mat-card class="level">Rationale
+                <br/> -Foundation</mat-card>
+        </div>
+        <div class="contentColumn" *ngIf="categoryUpdateService.selectedView == 'paradigm'">
+            <mat-card (click)="SelectCategory('scenarios')" class="category paradigm">
+                <h1>{{categoriesInfo.getDisplayTitle('scenarios')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('scenarios')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('outerEnvironment')" class="category paradigm">
+                <h1>{{categoriesInfo.getDisplayTitle('outerEnvironment')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('outerEnvironment')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('problem')" class="category paradigm">
+                <h1>{{categoriesInfo.getDisplayTitle('problem')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('problem')}}</h3>
+            </mat-card>
+        </div>
+        <div class="contentColumn" *ngIf="categoryUpdateService.selectedView == 'project'">
+            <mat-card (click)="SelectCategory('valuePropositions')" class="category project">
+                <h1>{{categoriesInfo.getDisplayTitle('valuePropositions')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('valuePropositions')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('scope')" class="category project">
+                <h1>{{categoriesInfo.getDisplayTitle('scope')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('scope')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('solution')" class="category project">
+                <h1>{{categoriesInfo.getDisplayTitle('solution')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('solution')}}</h3>
+            </mat-card>
+        </div>
+        <div class="contentColumn" *ngIf="categoryUpdateService.selectedView == 'product'">
+            <mat-card (click)="SelectCategory('features')" class="category product">
+                <h1>{{categoriesInfo.getDisplayTitle('features')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('features')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('innerEnvironment')" class="category product">
+                <h1>{{categoriesInfo.getDisplayTitle('innerEnvironment')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('innerEnvironment')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('leverage')" class="category product">
+                <h1>{{categoriesInfo.getDisplayTitle('leverage')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('leverage')}}</h3>
+            </mat-card>
+        </div>
+        <div class="selected process" class="message" *ngIf="categoryUpdateService.selectedView == 'process'">
+            <mat-card (click)="SelectCategory('tactic')" class="category process">
+                <h1>{{categoriesInfo.getDisplayTitle('tactic')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('tactic')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('strategy')" class="category process">
+                <h1>{{categoriesInfo.getDisplayTitle('strategy')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('strategy')}}</h3>
+            </mat-card>
+            <mat-card (click)="SelectCategory('rationale')" class="category process">
+                <h1>{{categoriesInfo.getDisplayTitle('rationale')}}</h1>
+                <h3>{{categoriesInfo.getTooltip('rationale')}}</h3>
+            </mat-card>
+        </div>
+    </div>
+
+    <a class="nav-link waves-light" (click)="SelectView('none')" *ngIf="categoryUpdateService.selectedView != 'none'" mdbWavesEffect>
+        <mat-icon aria-hidden="false">arrow_backward</mat-icon>
+        <h5>Select different view</h5>
+    </a>
+</div>

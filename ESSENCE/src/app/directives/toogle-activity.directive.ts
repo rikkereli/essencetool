@@ -21,7 +21,7 @@ export class ToogleActivityDirective {
       value => {
         console.log(this.appToogleActivity + " notified " + value.currentHover);
         // If mouseover item
-        if(value.currentHover !== "") {
+        if(value.currentHover !== "none") {
           // If we are not hovering over current item 
           if(this.appToogleActivity !== value.currentHover) {
             // See if category is connected

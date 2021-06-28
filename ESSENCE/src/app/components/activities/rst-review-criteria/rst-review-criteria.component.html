@@ -1,9 +1,0 @@
-<div id="contentContainer diagram " class="contentContainer">
-    <h1 *ngIf="navbarService.currentPageDetails">{{navbarService.currentPageDetails.title}}</h1>
-    <div class="categoryRow">
-        <app-category-box *ngIf="rationale$ | async as rationale" class="categoryBox" [appAutoGrow]="rationale" [category]="rationale"></app-category-box>
-        <app-category-box *ngIf="strategy$ | async as strategy" class="categoryBox" [appAutoGrow]="strategy" [category]="strategy"></app-category-box>
-        <app-category-box *ngIf="tactic$ | async as tactic" class="categoryBox" [appAutoGrow]="tactic" [category]="tactic"></app-category-box>
-    </div>
-    <app-next-activity></app-next-activity>
-</div>

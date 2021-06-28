@@ -40,6 +40,7 @@ export class ProjectDisplayItemComponent implements OnInit {
   }
   // When diagram is clicked, open the diagram 
   onDiagramClicked() {
+    
     this.router.navigate([routes.diagramTool]);
   }
 

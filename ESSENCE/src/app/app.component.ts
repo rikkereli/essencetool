@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoryBoxComponent } from './components/utilities/category-box/category-box.component'
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import * as ids from './assets/vars';
-import { map } from 'rxjs/operators';
-
+import { AngularFirestore } from '@angular/fire/firestore';
 
 export interface CategoryView {
   name: string;

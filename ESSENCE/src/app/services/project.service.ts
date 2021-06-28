@@ -101,7 +101,6 @@ export class ProjectService {
     var projectId = this.firestore.createId();
     this.addNewProjectToUser(projectId);
     this.addNewProjectToProjectCollection(projectId, projectName);
-
   }
 
   private addNewProjectToUser(projectId: string) {
@@ -114,17 +113,11 @@ export class ProjectService {
     const user = JSON.parse(localStorage.getItem('user'));
     // Projects should always start on challenge detected
     this.firestore.collection(ids.diagramsCollection).doc(projectId).set(
-      {projectName: projectName, projectStage: routes.challengeDetectedActivity});
+      {projectName: projectName, projectStage: routes.initialKnowledgeActivity});
     var projectRef = this.firestore.collection(ids.diagramsCollection).doc(projectId);
     // As challenge, problem and prospect are single item categories, we need to add an empty field to each
-    projectRef.collection(ids.problematic).add({subcategory: ids.challenge, text:"", orderNr: 1, status: Status.active});
-    projectRef.collection(ids.problematic).add({subcategory: ids.problem, text:"", orderNr: 2, status: Status.active});
-    projectRef.collection(ids.problematic).add({subcategory: ids.warrant, text:"", orderNr: 3, status: Status.active});
-    projectRef.collection(ids.resolution).add({subcategory: ids.prospect, text:"", orderNr: 1, status: Status.active});
-    projectRef.collection(ids.resolution).add({subcategory: ids.backing, text:"", orderNr: 2, status: Status.active});
-    projectRef.collection(ids.qualification).add({subcategory: ids.qualifier, text:"", orderNr:1, status: Status.active});
-    projectRef.collection(ids.qualification).add({subcategory: ids.rebuttal, text:"", orderNr:2, status: Status.active});
-
+    projectRef.collection(ids.problem).add({text:"", orderNr: 1, status: Status.active});
+    projectRef.collection(ids.solution).add({text:"", orderNr: 1, status: Status.active});
     projectRef.collection(ids.memebers).add({email: user.email});
   }
 

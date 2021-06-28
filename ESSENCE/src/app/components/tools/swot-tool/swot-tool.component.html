@@ -1,0 +1,16 @@
+<div class="contentContainer">
+    <h1>SWOT analasis of {{category}}</h1>
+
+    <div class="table-top">
+        <div class="name" title={{ecologyIdeaTooltip}}>Item idea</div>
+        <div class="value" title={{strengthTooltip}}>Strength</div>
+        <div class="value" title={{weaknessTooltip}}>Weakness</div>
+        <div class="value" title={{oppotunityTooltip}}>Oppotunity</div>
+        <div class="value" title={{threatTooltip}}>Threat</div>
+        <div class="value" title={{totalTooltip}}>Total</div>
+        <div class="value" title={{selectTooltip}}>Select</div>
+    </div>
+    <div *ngFor="let ecologyObject of categoryBoxService.categoryIDS">
+        <app-swotitem (valueChangedEvent)="categoryBoxService.updateItem($event)" [ecologyItem]="ecologyObject"></app-swotitem>
+    </div>
+</div>

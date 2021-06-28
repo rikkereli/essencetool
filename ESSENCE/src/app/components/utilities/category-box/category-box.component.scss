@@ -2,12 +2,15 @@ $product-view-color: rgb(212, 59, 59);
 $project-view-color: rgb(50, 136, 29);
 $paradigm-view-color: rgb(241, 197, 50);
 $process-view-color: #369;
+$product-view-color-transparant: rgba(212, 59, 59, 0.7);
+$project-view-color-transparant: rgba(50, 136, 29, 0.7);
+$paradigm-view-color-transparant: rgba(241, 197, 50, 0.7);
+$process-view-color-transparant: rgba(51, 102, 153, 0.7);
 .categoryContainer {
     justify-content: center;
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 0px;
 }
 
 .containerCard {
@@ -16,8 +19,20 @@ $process-view-color: #369;
 }
 
 .card-body {
-    border-style: solid;
-    border: 2px;
+    width: 100%;
+}
+
+.modal-background {
+    background-color: #4b4848 !important;
+}
+
+.image {
+    width: 100%;
+}
+
+.singleItemCategory {
+    height: 100%;
+    width: 100%;
 }
 
 h2 {
@@ -27,6 +42,7 @@ h2 {
 .card-header {
     height: fit-content;
     padding: 7px;
+    width: 100%;
 }
 
 .itemsRow {
@@ -45,13 +61,17 @@ h2 {
     padding: 0px;
 }
 
+.editButton.shouldUpdate {
+    opacity: 1;
+}
+
+.editButton.shouldNotUpdate {
+    opacity: 0.5;
+}
+
 .card-header.product {
     background-color: $product-view-color;
     border-color: $product-view-color;
-}
-
-.categoryContainer.product {
-    background-color: $product-view-color;
 }
 
 .card-header.process {
@@ -59,17 +79,9 @@ h2 {
     border-color: $process-view-color;
 }
 
-.categoryContainer.process {
-    background-color: $process-view-color;
-}
-
 .card-header.paradigm {
     background-color: $paradigm-view-color;
     border-color: $paradigm-view-color;
-}
-
-.categoryContainer.paradigm {
-    background-color: $paradigm-view-color;
 }
 
 .card-header.project {
@@ -77,8 +89,82 @@ h2 {
     border-color: $project-view-color;
 }
 
-.categoryContainer.project {
+.exampleDisplay {
+    height: 150px;
+    overflow: auto;
+}
+
+.contentDisplay {
+    height: 200px;
+    overflow: auto;
+}
+
+.categoryContainer {
+    height: fit-content;
+}
+
+.categoryBoxContainer.sameViewAsSelected.selectedCategory {
+    width: 500px;
+}
+
+.categoryBoxContainer.sameViewAsSelected.notSelectedCategory {
+    margin-left: 125px;
+    width: 250px;
+    margin-right: 125px;
+}
+
+.categoryBoxContainer.differentViewThanSelected.notSelectedCategory {
+    width: 250px;
+}
+
+.categoryBoxContainer {
+    margin: 5px;
+}
+
+.categoryContainer {
+    width: 100%;
+}
+
+.reasonableContainer {
+    background-color: gray;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.categoryContainer.product.selectedCategory,
+.categoryContainer.product.shouldUpdate {
+    background-color: $product-view-color;
+}
+
+.categoryContainer.product.notSelectedCategory.shouldNotUpdate {
+    background-color: $product-view-color-transparant;
+}
+
+.categoryContainer.process.selectedCategory,
+.categoryContainer.process.shouldUpdate {
+    background-color: $process-view-color;
+}
+
+.categoryContainer.process.notSelectedCategory.shouldNotUpdate {
+    background-color: $process-view-color-transparant;
+}
+
+.categoryContainer.paradigm.selectedCategory,
+.categoryContainer.paradigm.shouldUpdate {
+    background-color: $paradigm-view-color;
+}
+
+.categoryContainer.paradigm.notSelectedCategory.shouldNotUpdate {
+    background-color: $paradigm-view-color-transparant;
+}
+
+.categoryContainer.project.selectedCategory,
+.categoryContainer.project.shouldUpdate {
     background-color: $project-view-color;
+}
+
+.categoryContainer.project.notSelectedCategory.shouldNotUpdate {
+    background-color: $project-view-color-transparant;
 }
 
 .titleBox {
@@ -93,6 +179,18 @@ h2 {
     font-size: 20px;
     margin: 0px;
     color: rgb(255, 255, 255);
+}
+
+.titleText.selectedCategory {
+    opacity: 1;
+}
+
+.titleText.notSelectedCategory.shouldNotUpdate {
+    opacity: 0.7;
+}
+
+.titleText.notSelectedCategory.shouldUpdate {
+    opacity: 1;
 }
 
 .itemsBox {
@@ -120,4 +218,19 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.compareBody {
+    height: fit-content;
+    width: fit-content;
+}
+
+.comparedBackground {
+    height: fit-content;
+    width: fit-content;
+}
+
+.modal-content {
+    height: fit-content;
+    width: fit-content;
 }
